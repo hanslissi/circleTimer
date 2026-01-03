@@ -1,0 +1,33 @@
+import styles from "./WheelIndents.module.css";
+import clsx from "clsx";
+
+type Props = {
+  color: "teal" | "autumn";
+};
+
+export const WheelIndents = ({ color }: Props) => {
+  const glowingIndentClassNames = clsx(styles.glowingIndent, {
+    [styles.glowingTeal]: color === "teal",
+    [styles.glowingAutumn]: color === "autumn",
+  });
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.spacer} />
+      <div className={glowingIndentClassNames} />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div className={glowingIndentClassNames} />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
+  );
+};
