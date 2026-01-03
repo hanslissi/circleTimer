@@ -56,6 +56,10 @@
   --c-graysky-800: #40454a;
   --c-graysky-900: #383c41;
   --c-graysky-950: #232529;
+
+  /* ANIMATIONS */
+  --anim-duration-sm: 0.15s;
+  --anim-duration-md: 0.3s;
 }
 
 #root,

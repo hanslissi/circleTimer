@@ -1,0 +1,54 @@
+.container {
+  --progress: 0%;
+  --c-background: var(--c-teal-950);
+  --c-glow-center-start: var(--c-teal-500);
+  --c-glow-center-end: var(--c-teal-300);
+  --c-glow-shadow-small: var(--c-teal-600);
+  --c-glow-shadow-big: var(--c-teal-400);
+
+  display: flex;
+
+  height: 10rem;
+  width: var(--size-md);
+  padding: var(--gap-sm);
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--c-graysky-900) 0%, black 100%);
+}
+
+.lightstrip {
+  display: flex;
+  align-items: end;
+
+  width: 100%;
+  background-color: var(--c-background);
+  border-radius: var(--radius-full);
+}
+.lightstrip::after {
+  content: "";
+  width: 100%;
+  height: var(--progress);
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    var(--c-glow-center-end),
+    var(--c-glow-center-start)
+  );
+  box-shadow: 0 0 .5rem var(--c-glow-shadow-small),
+    0 0 1rem var(--c-glow-shadow-big);
+  transition: height ease-in-out var(--anim-duration-sm);
+}
+
+.glowingTeal {
+  --c-background: var(--c-teal-950);
+  --c-glow-center-start: var(--c-teal-500);
+  --c-glow-center-end: var(--c-teal-300);
+  --c-glow-shadow-small: var(--c-teal-600);
+  --c-glow-shadow-big: var(--c-teal-400);
+}
+
+.glowingAutumn {
+  --c-background: var(--c-autumn-950);
+  --c-glow-center-start: var(--c-autumn-500);
+  --c-glow-center-end: var(--c-autumn-300);
+  --c-glow-shadow-small: var(--c-autumn-600);
+  --c-glow-shadow-big: var(--c-autumn-400);
+}
