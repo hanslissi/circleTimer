@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "LCD14Italic";
+  src: local("LCD14Italic"), url("./assets/fonts/LCD14Italic/LCD14Italic.otf");
+}
+
 :root {
   /* ELEMENT SIZES */
   --size-sm: 0.2rem;
@@ -50,6 +55,7 @@
   --c-graysky-100: #e4e8e9;
   --c-graysky-200: #ccd2d5;
   --c-graysky-300: #a8b2b8;
+  --c-graysky-400: #7d8a93;
   --c-graysky-500: #626f78;
   --c-graysky-600: #4e575f;
   --c-graysky-700: #484f56;
@@ -60,6 +66,17 @@
   /* ANIMATIONS */
   --anim-duration-sm: 0.15s;
   --anim-duration-md: 0.3s;
+
+  /* FONT TOKENS */
+  --f-size-sm: 0.875rem;
+  --f-size-md: 1rem;
+  --f-size-lg: 1.5rem;
+  --f-size-xl: 2rem;
+  --f-size-2xl: 2.5rem;
+
+  --f-fancy: "Space Grotesk", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --f-segment: "LCD14Italic", "Courier";
+
 }
 
 #root,
@@ -71,5 +88,5 @@ body {
 
 body {
   margin: 0;
-  font-family: "Space Grotesk", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--f-fancy);
 }
