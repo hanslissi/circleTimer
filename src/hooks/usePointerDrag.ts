@@ -67,6 +67,7 @@ export const usePointerDrag = ({ onDrag, onDragEnd }: Props) => {
   }, [onDrag, onDragEnd]);
 
   const handlePointerDown: PointerEventHandler<HTMLElement> = (e) => {
+    e.preventDefault();
     startPosRef.current = { x: e.clientX, y: e.clientY };
     pointerIdRef.current = e.pointerId;
     e.currentTarget.setPointerCapture(e.pointerId);

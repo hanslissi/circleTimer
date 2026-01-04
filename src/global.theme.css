@@ -95,4 +95,5 @@ button {
   padding: 0;
   border: 0;
   font-family: var(--f-fancy);
+  user-select: none;
 }
