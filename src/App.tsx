@@ -49,7 +49,7 @@ function App() {
         color="graysky"
       />
       <Diode on />
-      <Diode off />
+      <Diode />
     </div>
   );
 }
