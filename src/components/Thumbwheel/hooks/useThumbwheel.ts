@@ -30,7 +30,8 @@ export const useThumbwheel = ({ onChange, stepSize = 10 }: Props) => {
       }
       indentsRef.current.style.transform = `translateY(${transformY}px)`;
       if (onChange) {
-        onChange(Math.floor(totalDeltaY / stepSize));
+        const currentStepValue = Math.floor(totalDeltaY / stepSize);
+        onChange(-currentStepValue); // invert, because translateY is inverted (+) is down
       }
     });
   };
