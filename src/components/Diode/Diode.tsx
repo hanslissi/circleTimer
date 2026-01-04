@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import styles from "./Diode.module.css";
 
 type Props = {

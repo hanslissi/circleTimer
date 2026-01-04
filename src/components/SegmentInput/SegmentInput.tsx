@@ -1,11 +1,11 @@
 import { useState, type ChangeEvent } from "react";
-import type { Predicate } from "../../utils/types";
+import { clsx } from "clsx";
 import {
   convertDurationDigitsToSeconds,
   convertSecondsToDurationDigits,
 } from "./utils/durationInputUtils";
 import styles from "./SegmentInput.module.css";
-import clsx from "clsx";
+import type { Predicate } from "../../utils/types";
 
 type Props = {
   value: number;

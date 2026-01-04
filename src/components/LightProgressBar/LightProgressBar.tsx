@@ -1,7 +1,7 @@
-import type { CSSProperties } from "react";
-import styles from "./LightProgressBar.module.css";
+import { clsx } from "clsx";
 import { progressOf } from "../../utils/mathUtils";
-import clsx from "clsx";
+import styles from "./LightProgressBar.module.css";
+import type { CSSProperties } from "react";
 
 type Props = {
   value: number;

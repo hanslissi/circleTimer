@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import { clsx } from "clsx";
 import styles from "./Thumbwheel.module.css";
 import { WheelIndents } from "./WheelIndents/WheelIndents";
 import { useThumbwheel } from "./hooks/useThumbwheel";
@@ -9,7 +9,11 @@ type Props = {
   stepSize?: number;
 };
 
-export const Thumbwheel = ({ color = "teal", onChange, stepSize = 10 }: Props) => {
+export const Thumbwheel = ({
+  color = "teal",
+  onChange,
+  stepSize = 10,
+}: Props) => {
   const { indentsRef, handlePointerDown } = useThumbwheel({
     onChange,
     stepSize,

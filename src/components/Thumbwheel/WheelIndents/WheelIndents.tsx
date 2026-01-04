@@ -1,5 +1,5 @@
+import { clsx } from "clsx";
 import styles from "./WheelIndents.module.css";
-import clsx from "clsx";
 
 type Props = {
   color?: "teal" | "autumn";
