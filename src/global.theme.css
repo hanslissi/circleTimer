@@ -64,6 +64,7 @@
   --c-graysky-950: #232529;
 
   /* ANIMATIONS */
+  --anim-duration-xs: 0.1s;
   --anim-duration-sm: 0.15s;
   --anim-duration-md: 0.3s;
 
@@ -87,5 +88,11 @@ body {
 
 body {
   margin: 0;
+  font-family: var(--f-fancy);
+}
+
+button {
+  padding: 0;
+  border: 0;
   font-family: var(--f-fancy);
 }

@@ -3,6 +3,7 @@ import { Thumbwheel } from "./components/Thumbwheel/Thumbwheel";
 import { LightProgressBar } from "./components/LightProgressBar/LightProgressBar";
 import { SegmentInput } from "./components/SegmentInput/SegmentInput";
 import { Diode } from "./components/Diode/Diode";
+import { Button } from "./components/Button/Button";
 
 function App() {
   const [hours, setHours] = useState(0);
@@ -32,6 +33,7 @@ function App() {
       <SegmentInput isDuration isDisplayOnly value={hours} color="graysky" />
       <Diode on />
       <Diode />
+      <Button onClick={() => console.log("Helloo")}>Hello</Button>
     </div>
   );
 }
