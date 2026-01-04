@@ -18,18 +18,9 @@ function App() {
       />
       <LightProgressBar value={hours} min={0} max={60} />
       <LightProgressBar value={hours} min={-10} max={-5} color="autumn" />
-      <SegmentInput
-        isDuration={false}
-        label="duration"
-        onChange={(v) => {
-          setHours(v);
-          console.log(v);
-        }}
-        value={hours}
-      />
+      <SegmentInput isDuration={false} isDisplayOnly value={hours} />
       <SegmentInput
         isDuration
-        label="duration"
         onChange={(v) => {
           setHours(v);
           console.log(v);
@@ -38,16 +29,7 @@ function App() {
         color="autumn"
         size="small"
       />
-      <SegmentInput
-        isDuration
-        label="duration"
-        onChange={(v) => {
-          setHours(v);
-          console.log(v);
-        }}
-        value={hours}
-        color="graysky"
-      />
+      <SegmentInput isDuration isDisplayOnly value={hours} color="graysky" />
       <Diode on />
       <Diode />
     </div>

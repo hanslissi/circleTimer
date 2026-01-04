@@ -10,8 +10,9 @@ import type { Predicate } from "../../utils/types";
 type Props = {
   value: number;
   isDuration: boolean;
-  onChange: Predicate<number>;
-  label: string;
+  isDisplayOnly?: boolean;
+  onChange?: Predicate<number>;
+  label?: string;
   size?: "big" | "small";
   color?: "teal" | "autumn" | "graysky";
 };
@@ -19,8 +20,9 @@ type Props = {
 export const SegmentInput = ({
   value,
   isDuration = false,
+  isDisplayOnly = false,
   onChange,
-  label,
+  label = "value",
   size = "big",
   color = "teal",
 }: Props) => {
@@ -48,7 +50,7 @@ export const SegmentInput = ({
     setInputValue(val);
 
     const seconds = convertDurationDigitsToSeconds(parseInt(val) || 0);
-    onChange(seconds);
+    onChange?.(seconds);
   };
 
   const handleFocus = () => {
@@ -69,7 +71,7 @@ export const SegmentInput = ({
     if (isDuration) {
       handleDurationInput(e);
     } else {
-      onChange(parseInt(e.target.value) || 0);
+      onChange?.(parseInt(e.target.value) || 0);
     }
   };
 
@@ -77,25 +79,18 @@ export const SegmentInput = ({
 
   return (
     <div className={clsx(styles.container, themeClassNames)}>
-      <input
-        type={"number"}
-        inputMode={"numeric"}
-        value={isDuration ? inputValue : value}
-        onChange={handleOnChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        aria-label={label}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0,
-          cursor: "pointer",
-          fontSize: "16px", // Prevents zoom on iOS
-        }}
-      />
+      {!isDisplayOnly && (
+        <input
+          type={"number"}
+          inputMode={"numeric"}
+          value={isDuration ? inputValue : value}
+          onChange={handleOnChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          aria-label={label}
+          className={styles.numberInput}
+        />
+      )}
 
       <div className={styles.display}>
         <div className={styles.doubleDigit}>
