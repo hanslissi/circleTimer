@@ -1,5 +1,5 @@
 .container {
-  --thumbwheel-padding: var(--size-lg);
+  --thumbwheel-padding: var(--gap-lg);
   --thumbwheel-width: 5rem;
   --thumbwheel-height: calc(var(--thumbwheel-width) * 2);
 
@@ -8,7 +8,6 @@
   height: var(--thumbwheel-height);
   padding: var(--thumbwheel-padding);
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--c-graysky-900) 0%, black 100%);
 }
 .container::before {
   content: "";

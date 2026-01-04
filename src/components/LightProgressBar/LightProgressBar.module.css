@@ -12,7 +12,6 @@
   width: var(--size-md);
   padding: var(--gap-sm);
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--c-graysky-900) 0%, black 100%);
 }
 
 .lightstrip {
@@ -32,7 +31,7 @@
     var(--c-glow-center-end),
     var(--c-glow-center-start)
   );
-  box-shadow: 0 0 .5rem var(--c-glow-shadow-small),
+  box-shadow: 0 0 0.5rem var(--c-glow-shadow-small),
     0 0 1rem var(--c-glow-shadow-big);
   transition: height ease-in-out var(--anim-duration-sm);
 }

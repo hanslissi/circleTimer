@@ -23,7 +23,7 @@ export const LightProgressBar = ({
   });
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, "litPlatform")}>
       <div
         className={lightStripClassNames}
         style={{ "--progress": `${progress}%` } as CSSProperties}

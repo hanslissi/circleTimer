@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import styles from "./Thumbwheel.module.css";
 import { WheelIndents } from "./WheelIndents/WheelIndents";
 import { useThumbwheel } from "./hooks/useThumbwheel";
@@ -15,7 +16,7 @@ export const Thumbwheel = ({ color = "teal", onChange, stepSize = 10 }: Props) =
   });
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, "litPlatform")}>
       <div className={styles.thumbwheel}>
         <div
           className={styles.wheelInteractContainer}

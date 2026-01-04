@@ -1,0 +1,54 @@
+.container {
+  --c-glow-center-start: var(--c-teal-200);
+  --c-glow-center-end: var(--c-teal-600);
+  --c-glow-center-start-off: var(--c-graysky-950);
+  --c-glow-center-start-on: var(--c-graysky-700);
+
+  width: var(--size-lg);
+  height: var(--size-lg);
+  padding: var(--gap-sm);
+  border-radius: var(--radius-full);
+}
+
+.glowingTeal {
+  --c-glow-center-start: var(--c-teal-200);
+  --c-glow-center-end: var(--c-teal-600);
+}
+.glowingAutumn {
+  --c-glow-center-start: var(--c-autumn-200);
+  --c-glow-center-end: var(--c-autumn-600);
+}
+.glowingGraySky {
+  --c-glow-center-start: var(--c-graysky-200);
+  --c-glow-center-end: var(--c-graysky-300);
+}
+
+.diode {
+  border-radius: var(--radius-full);
+  width: 100%;
+  height: 100%;
+
+  --rg-reflection: radial-gradient(
+    ellipse at 30% 30%,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 20%
+  );
+
+  background: var(--rg-reflection),
+    radial-gradient(
+      ellipse at center,
+      var(--c-glow-center-start-off),
+      var(--c-glow-center-start-on)
+    );
+}
+
+.diode.on {
+  background: var(--rg-reflection),
+    radial-gradient(
+      ellipse at center,
+      var(--c-glow-center-start),
+      var(--c-glow-center-end)
+    );
+  box-shadow: 0 0 0.5rem var(--c-glow-center-end),
+    0 0 0.75rem var(--c-glow-center-start);
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Thumbwheel } from "./components/Thumbwheel/Thumbwheel";
 import { LightProgressBar } from "./components/LightProgressBar/LightProgressBar";
 import { SegmentInput } from "./components/SegmentInput/SegmentInput";
+import { Diode } from "./components/Diode/Diode";
 
 function App() {
   const [hours, setHours] = useState(0);
@@ -47,6 +48,8 @@ function App() {
         value={hours}
         color="graysky"
       />
+      <Diode on />
+      <Diode off />
     </div>
   );
 }
