@@ -1,15 +1,17 @@
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { usePointerYDrag } from "../../../hooks/usePointerYDrag";
 
 type Props = {
-  onChange?: (value: number) => void;
+  value: number;
+  onChange: (value: number) => void;
   stepSize?: number;
 };
 
-export const useThumbwheel = ({ onChange, stepSize = 10 }: Props) => {
+export const useThumbwheel = ({ value, onChange, stepSize = 10 }: Props) => {
+  const isDraggingRef = useRef(false);
   const indentsRef = useRef<HTMLDivElement>(null);
 
-  const updateWheelTransform = (_: number, totalDeltaY: number) => {
+  const transformWheelY = useCallback((totalDeltaY: number) => {
     if (indentsRef.current === null) {
       return;
     }
@@ -20,8 +22,8 @@ export const useThumbwheel = ({ onChange, stepSize = 10 }: Props) => {
       numSegmentTurns > 0
         ? -segmentHeight
         : numSegmentTurns < 0
-        ? segmentHeight
-        : 0;
+          ? segmentHeight
+          : 0;
     const transformY = segmentTurnOffsetY + (totalDeltaY % segmentHeight);
 
     requestAnimationFrame(() => {
@@ -29,16 +31,39 @@ export const useThumbwheel = ({ onChange, stepSize = 10 }: Props) => {
         return;
       }
       indentsRef.current.style.transform = `translateY(${transformY}px)`;
-      if (onChange) {
-        const currentStepValue = Math.floor(totalDeltaY / stepSize);
-        onChange(-currentStepValue); // invert, because translateY is inverted (+) is down
-      }
     });
+  }, []);
+
+  const handleDrag = (_: number, totalDeltaY: number) => {
+    isDraggingRef.current = true;
+    transformWheelY(totalDeltaY);
+
+    const newStep = -Math.round(totalDeltaY / stepSize);
+
+    // only update value if it has changed (due to stepSize)
+    if (newStep !== value) {
+      onChange(newStep);
+    }
   };
 
-  const { handlePointerDown } = usePointerYDrag({
-    onDrag: updateWheelTransform,
+  const handleDragEnd = () => {
+    isDraggingRef.current = false;
+  };
+
+  const { handlePointerDown, setTotalDeltaY } = usePointerYDrag({
+    onDrag: handleDrag,
+    onDragEnd: handleDragEnd,
   });
+
+  useEffect(() => {
+    if (isDraggingRef.current) {
+      return;
+    }
+
+    const totalDeltaY = -(value * stepSize);
+    transformWheelY(totalDeltaY);
+    setTotalDeltaY(totalDeltaY);
+  }, [value, stepSize, transformWheelY, setTotalDeltaY]);
 
   return {
     indentsRef,

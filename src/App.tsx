@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Thumbwheel } from "./components/Thumbwheel/Thumbwheel";
 import { LightProgressBar } from "./components/LightProgressBar/LightProgressBar";
-import { SegmentInput } from "./components/SegmentInput/SegmentInput";
+import { DurationInput } from "./components/DurationInput/DurationInput";
 import { Button } from "./components/Button/Button";
 import { PageLayoutWrapper } from "./layouts/PageLayoutWrapper/PageLayoutWrapper";
 import styles from "./App.module.css";
@@ -15,14 +15,14 @@ function App() {
       <div className={styles.circleTimer}>
         <div className={styles.circleTimerDisplay}></div>
         <div className={styles.interfaceSection}>
-          <div className={styles.timeDisplaysSection}>
-            <SegmentInput
+          <div className={styles.timeDisplaysSection}>            
+            <DurationInput
               isDuration
               label="Work time"
               value={secondsWork}
               onChange={setSecondsWork}
             />
-            <SegmentInput
+            <DurationInput
               isDuration
               color="autumn"
               label="Rest time"
@@ -32,17 +32,26 @@ function App() {
           </div>
           <div className={styles.thumbwheelsSection}>
             <div className={styles.thumbwheelContainer}>
-              <Thumbwheel onChange={setSecondsWork} />
+              <Thumbwheel value={secondsWork} onChange={setSecondsWork} />
               <LightProgressBar value={secondsWork} min={0} max={659} />
             </div>
             <div className={styles.thumbwheelContainer}>
-              <LightProgressBar color="autumn" value={secondsRest} min={0} max={659}/>
-              <Thumbwheel color="autumn" onChange={setSecondsRest} />
+              <LightProgressBar
+                color="autumn"
+                value={secondsRest}
+                min={0}
+                max={659}
+              />
+              <Thumbwheel
+                value={secondsRest}
+                color="autumn"
+                onChange={setSecondsRest}
+              />
             </div>
           </div>
           <div className={styles.buttonsSection}>
             <Button
-              onClick={() => console.log("Add")}
+              onClick={() => setSecondsWork(50)}
               className={styles.button}
             >
               Add

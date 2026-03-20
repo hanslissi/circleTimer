@@ -4,17 +4,20 @@ import { WheelIndents } from "./WheelIndents/WheelIndents";
 import { useThumbwheel } from "./hooks/useThumbwheel";
 
 type Props = {
-  color?: "teal" | "autumn";
-  onChange?: (value: number) => void;
+  value: number;
+  onChange: (value: number) => void;
   stepSize?: number;
+  color?: "teal" | "autumn";
 };
 
 export const Thumbwheel = ({
-  color = "teal",
+  value,
   onChange,
   stepSize = 10,
+  color = "teal",
 }: Props) => {
   const { indentsRef, handlePointerDown } = useThumbwheel({
+    value,
     onChange,
     stepSize,
   });

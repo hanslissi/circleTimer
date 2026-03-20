@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "LCD14Italic";
-  src: local("LCD14Italic"), url("./assets/fonts/LCD14Italic/LCD14Italic.otf");
+  font-family: "7segment";
+  src: local("7segment"), url("./assets/fonts/7segment/7segment.ttf");
 }
 
 :root {
@@ -76,7 +76,7 @@
   --f-size-2xl: 2.5rem;
 
   --f-fancy: "Space Grotesk", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --f-segment: "LCD14Italic", "Courier";
+  --f-segment: "7segment", "Courier";
 }
 
 #root,
