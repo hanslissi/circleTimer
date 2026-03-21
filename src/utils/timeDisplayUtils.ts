@@ -52,6 +52,10 @@ export function timeDisplayToSeconds(timeDisplay: string): number {
   return durationDigitsToSeconds(timeDisplay.replaceAll(":", ""));
 }
 
+export function timeDisplayToDurationDigits(timeDisplay: string): string {
+  return timeDisplay.replaceAll(":", "");
+}
+
 export function timeDisplayToText(timeDisplay: string): string {
   const durationParts = timeDisplay
     .split(":")
@@ -80,4 +84,22 @@ export function getMinutesSuffix(minutes: number): string {
 
 export function getSecondsSuffix(seconds: number): string {
   return seconds === 1 ? "second" : "seconds";
+}
+
+export function getPlaceholderTimeDisplay(maxSeconds: number): string {
+  return secondsToTimeDisplay(maxSeconds).replaceAll(/[0-9]/g, "0");
+}
+
+export function trimToPlaceholder(
+  timeDisplay: string,
+  placeholder: string,
+): string {
+  const maxDigits = placeholder.replaceAll(":", "").length;
+  const durationDigits = timeDisplayToDurationDigits(timeDisplay);
+  return durationDigitsToTimeDisplay(
+    durationDigits.substring(
+      durationDigits.length - maxDigits,
+      durationDigits.length,
+    ),
+  );
 }

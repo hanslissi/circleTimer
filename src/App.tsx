@@ -15,7 +15,7 @@ function App() {
       <div className={styles.circleTimer}>
         <div className={styles.circleTimerDisplay}></div>
         <div className={styles.interfaceSection}>
-          <div className={styles.timeDisplaysSection}>            
+          <div className={styles.timeDisplaysSection}>
             <DurationInput
               isDuration
               label="Work time"

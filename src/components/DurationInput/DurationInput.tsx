@@ -4,10 +4,13 @@ import { clamp } from "../../utils/mathUtils";
 import { useShiftToggle } from "../../hooks/useShiftToggle";
 import {
   durationDigitsToTimeDisplay,
+  getPlaceholderTimeDisplay,
   secondsToTimeDisplay,
   timeDisplayToSeconds,
   timeDisplayToText,
+  trimToPlaceholder,
 } from "../../utils/timeDisplayUtils";
+import { nudge as nudgeDetent } from "../../utils/inputUtils";
 import styles from "./DurationInput.module.css";
 import type { Predicate } from "../../utils/types";
 
@@ -53,22 +56,23 @@ export const DurationInput = ({
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [raw, setRaw] = useState<string>(secondsToTimeDisplay(value));
 
+  const placeholder = getPlaceholderTimeDisplay(max);
   const displayValue = isFocused ? raw : secondsToTimeDisplay(value);
+  const displayValueTrimmed = trimToPlaceholder(displayValue, placeholder);
   const currentSeconds = isFocused ? timeDisplayToSeconds(raw) : value;
 
   const commit = (seconds: number) => {
-    if (onChange) {
-      onChange(seconds);
-    }
+    onChange?.(seconds);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
-    setRaw(durationDigitsToTimeDisplay(value));
+    const newRawValue = durationDigitsToTimeDisplay(value);
+    setRaw(newRawValue);
   };
 
   const nudge = (delta: number) => {
-    const newValue = clamp(currentSeconds + delta, min, max);
+    const newValue = clamp(nudgeDetent(currentSeconds, delta), min, max);
     setRaw(secondsToTimeDisplay(newValue));
     commit(newValue);
   };
@@ -86,7 +90,7 @@ export const DurationInput = ({
       nudge(-nudgeAmount);
     } else if (e.key === "Enter") {
       e.preventDefault();
-      commit(timeDisplayToSeconds(raw));
+      commit(timeDisplayToSeconds(displayValueTrimmed));
       inputRef.current?.blur();
     }
   };
@@ -98,13 +102,13 @@ export const DurationInput = ({
 
   const handleBlur = () => {
     setIsFocused(false);
-    commit(timeDisplayToSeconds(raw));
+    commit(timeDisplayToSeconds(displayValueTrimmed));
   };
 
   return (
     <div className={clsx(styles.container, themeClassNames)}>
       <div className={styles.display}>
-        <span className={styles.doubleDigit}>00:00</span>
+        <span className={styles.doubleDigit}>{placeholder}</span>
       </div>
 
       <input
@@ -114,7 +118,7 @@ export const DurationInput = ({
         type="text"
         inputMode="numeric"
         value={displayValue}
-        aria-valuetext={timeDisplayToText(displayValue)}
+        aria-valuetext={timeDisplayToText(displayValueTrimmed)}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
