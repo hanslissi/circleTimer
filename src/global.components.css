@@ -7,3 +7,11 @@
 .litPlatform {
   background: linear-gradient(135deg, var(--c-graysky-900) 0%, black 100%);
 }
+
+.metalSlateIndent {
+  background: linear-gradient(145deg, var(--c-graysky-950) 40%, var(--c-graysky-300));
+}
+
+.metalSlateOutdent {
+  background: linear-gradient(120deg, var(--c-graysky-300) 0%, var(--c-graysky-950) 40%);
+}

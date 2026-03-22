@@ -29,17 +29,19 @@ export const Thumbwheel = ({
   });
 
   return (
-    <div className={clsx(styles.container, "litPlatform")}>
-      <div className={styles.thumbwheel}>
-        <div
-          className={styles.wheelInteractContainer}
-          onPointerDown={handlePointerDown}
-        >
-          <div ref={indentsRef} className={styles.indentsContainer}>
-            <div className={styles.indents}>
-              <WheelIndents color={color} />
-              <WheelIndents color={color} />
-              <WheelIndents color={color} />
+    <div className={clsx(styles.metalSlant, "metalSlateOutdent")}>
+      <div className={clsx(styles.platform, "litPlatform")}>
+        <div className={styles.thumbwheel}>
+          <div
+            className={styles.wheelInteractContainer}
+            onPointerDown={handlePointerDown}
+          >
+            <div ref={indentsRef} className={styles.indentsContainer}>
+              <div className={styles.indents}>
+                <WheelIndents color={color} />
+                <WheelIndents color={color} />
+                <WheelIndents color={color} />
+              </div>
             </div>
           </div>
         </div>

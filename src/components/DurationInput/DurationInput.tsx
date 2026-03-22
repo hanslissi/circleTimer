@@ -104,24 +104,26 @@ export const DurationInput = ({
   };
 
   return (
-    <div className={clsx(styles.container, themeClassNames)}>
-      <div className={styles.display}>
-        <span className={styles.doubleDigit}>{placeholder}</span>
-      </div>
+    <div className={clsx(styles.metalSlant, "metalSlateIndent")}>
+      <div className={clsx(styles.container, themeClassNames)}>
+        <div className={styles.display}>
+          <span className={styles.doubleDigit}>{placeholder}</span>
+        </div>
 
-      <input
-        className={styles.durationInput}
-        ref={inputRef}
-        aria-label={label}
-        type="text"
-        inputMode="numeric"
-        value={displayValue}
-        aria-valuetext={timeDisplayToText(displayValueTrimmed)}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onKeyDown={handleKeyDown}
-      />
+        <input
+          className={styles.durationInput}
+          ref={inputRef}
+          aria-label={label}
+          type="text"
+          inputMode="numeric"
+          value={displayValue}
+          aria-valuetext={timeDisplayToText(displayValueTrimmed)}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
     </div>
   );
 };

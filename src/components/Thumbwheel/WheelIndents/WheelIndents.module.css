@@ -24,11 +24,11 @@
 
 .container > div:not(.glowingIndent, .spacer) {
   width: 100%;
-  height: 0.4rem;
+  height: 0.35rem;
   background: linear-gradient(
     var(--c-graysky-200) 0%,
-    var(--c-graysky-900) 40%,
-    var(--c-graysky-950) 80%,
+    var(--c-graysky-800) 20%,
+    var(--c-graysky-900) 80%,
     var(--c-graysky-200) 100%
   );
 }

@@ -18,12 +18,14 @@ function App() {
           <div className={styles.timeDisplaysSection}>
             <DurationInput
               min={0}
-              max={599}
+              max={3599}
               label="Work time"
               value={secondsWork}
               onChange={setSecondsWork}
             />
             <DurationInput
+              min={0}
+              max={3599}
               color="autumn"
               label="Rest time"
               value={secondsRest}
@@ -34,22 +36,22 @@ function App() {
             <div className={styles.thumbwheelContainer}>
               <Thumbwheel
                 min={0}
-                max={599}
+                max={3599}
                 value={secondsWork}
                 onChange={setSecondsWork}
               />
-              <LightProgressBar min={0} max={599} value={secondsWork} />
+              <LightProgressBar min={0} max={3599} value={secondsWork} />
             </div>
             <div className={styles.thumbwheelContainer}>
               <LightProgressBar
                 min={0}
-                max={599}
+                max={3599}
                 color="autumn"
                 value={secondsRest}
               />
               <Thumbwheel
                 min={0}
-                max={599}
+                max={3599}
                 value={secondsRest}
                 onChange={setSecondsRest}
                 color="autumn"
