@@ -17,8 +17,11 @@
   background-color: var(--c-background);
   color: var(--c-segment-faint);
   border-radius: var(--radius);
-  box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.2),
+  box-shadow:
+    inset 4px 4px 4px rgba(0, 0, 0, 0.2),
     inset 0 0 1rem 2px rgba(0, 0, 0, 0.2);
+
+  overflow: hidden;
 }
 
 .durationInput {
@@ -38,6 +41,10 @@
 
   color: var(--c-segment-active);
   text-align: right;
+
+  text-shadow:
+    0 0 0.15rem var(--c-glow-shadow-small),
+    0 0 .5rem var(--c-glow-shadow-big);
 }
 
 .glowingTeal {
@@ -45,21 +52,25 @@
   --c-segment-faint: var(--c-teal-900);
   --c-segment-separator: var(--c-teal-600);
   --c-segment-active: var(--c-teal-300);
-  /* --c-segment-glow: var(--c-teal-200); */
+  --c-glow-shadow-small: var(--c-teal-600);
+  --c-glow-shadow-big: var(--c-teal-400);
 }
 .glowingAutumn {
   --c-background: var(--c-autumn-950);
   --c-segment-faint: var(--c-autumn-900);
   --c-segment-separator: var(--c-autumn-600);
   --c-segment-active: var(--c-autumn-300);
-  /* --c-segment-glow: var(--c-autumn-200); */
+  --c-segment-glow: var(--c-autumn-200);
+  --c-glow-shadow-small: var(--c-autumn-600);
+  --c-glow-shadow-big: var(--c-autumn-400);
 }
 .glowingGraySky {
   --c-background: var(--c-graysky-950);
   --c-segment-faint: var(--c-graysky-900);
   --c-segment-separator: var(--c-graysky-600);
   --c-segment-active: var(--c-graysky-300);
-  /* --c-segment-glow: var(--c-graysky-200); */
+  --c-glow-shadow-small: var(--c-graysky-600);
+  --c-glow-shadow-big: var(--c-graysky-400);
 }
 
 .variantBig {
