@@ -16,8 +16,6 @@ import type { Predicate } from "../../utils/types";
 
 type Props = {
   value: number;
-  isDuration?: boolean;
-  isDisplayOnly?: boolean;
   onChange?: Predicate<number>;
   min?: number;
   max?: number;
@@ -32,7 +30,7 @@ export const DurationInput = ({
   value,
   onChange,
   min = 0,
-  max = 3600,
+  max = 100,
   smallNudgeAmount = 1,
   bigNudgeAmount = 10,
   label = "value",

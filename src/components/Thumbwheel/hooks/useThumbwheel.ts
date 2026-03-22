@@ -1,13 +1,22 @@
 import { useCallback, useEffect, useRef } from "react";
 import { usePointerYDrag } from "../../../hooks/usePointerYDrag";
+import { clamp } from "../../../utils/mathUtils";
 
 type Props = {
   value: number;
   onChange: (value: number) => void;
+  min?: number;
+  max?: number;
   stepSize?: number;
 };
 
-export const useThumbwheel = ({ value, onChange, stepSize = 10 }: Props) => {
+export const useThumbwheel = ({
+  value,
+  onChange,
+  min = 0,
+  max = 100,
+  stepSize = 10,
+}: Props) => {
   const isDraggingRef = useRef(false);
   const indentsRef = useRef<HTMLDivElement>(null);
 
@@ -36,18 +45,19 @@ export const useThumbwheel = ({ value, onChange, stepSize = 10 }: Props) => {
 
   const handleDrag = (_: number, totalDeltaY: number) => {
     isDraggingRef.current = true;
-    transformWheelY(totalDeltaY);
-
-    const newStep = -Math.round(totalDeltaY / stepSize);
+    const clampedTotalDeltaY = -clamp(-totalDeltaY, min * stepSize, max * stepSize);
+    const newStep = -Math.round(clampedTotalDeltaY / stepSize);
 
     // only update value if it has changed (due to stepSize)
     if (newStep !== value) {
       onChange(newStep);
     }
+    transformWheelY(clampedTotalDeltaY);
   };
 
-  const handleDragEnd = () => {
+  const handleDragEnd = (totalDeltaY: number) => {
     isDraggingRef.current = false;
+    setTotalDeltaY(-clamp(-totalDeltaY, min * stepSize, max * stepSize));
   };
 
   const { handlePointerDown, setTotalDeltaY } = usePointerYDrag({

@@ -6,6 +6,8 @@ import { useThumbwheel } from "./hooks/useThumbwheel";
 type Props = {
   value: number;
   onChange: (value: number) => void;
+  min?: number;
+  max?: number;
   stepSize?: number;
   color?: "teal" | "autumn";
 };
@@ -13,12 +15,16 @@ type Props = {
 export const Thumbwheel = ({
   value,
   onChange,
+  min = 0,
+  max = 100,
   stepSize = 10,
   color = "teal",
 }: Props) => {
   const { indentsRef, handlePointerDown } = useThumbwheel({
     value,
     onChange,
+    min,
+    max,
     stepSize,
   });
 
