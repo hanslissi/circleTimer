@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Thumbwheel } from "./components/Thumbwheel/Thumbwheel";
-import { LightProgressBar } from "./components/LightProgressBar/LightProgressBar";
-import { DurationInput } from "./components/DurationInput/DurationInput";
-import { Button } from "./components/Button/Button";
+import Thumbwheel from "@components/Thumbwheel";
+import Button from "@components/Button";
+import LightProgressBar from "@components/LightProgressBar";
+import DurationInput from "@components/DurationInput";
 import { PageLayoutWrapper } from "./layouts/PageLayoutWrapper/PageLayoutWrapper";
 import styles from "./App.module.css";
 

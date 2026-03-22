@@ -6,7 +6,7 @@ type Props = {
   color?: "teal" | "autumn" | "graysky";
 };
 
-export const Diode = ({ on = false, color = "teal" }: Props) => {
+const Diode = ({ on = false, color = "teal" }: Props) => {
   const themeClassName = clsx({
     [styles.glowingTeal]: color === "teal",
     [styles.glowingAutumn]: color === "autumn",
@@ -18,3 +18,5 @@ export const Diode = ({ on = false, color = "teal" }: Props) => {
     </div>
   );
 };
+
+export default Diode;

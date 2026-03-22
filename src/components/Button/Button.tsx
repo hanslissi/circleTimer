@@ -8,7 +8,7 @@ type Button = {
   children?: string;
 };
 
-export const Button = ({ onClick, disabled, className, children }: Button) => {
+const Button = ({ onClick, disabled, className, children }: Button) => {
   return (
     <button
       onClick={onClick}
@@ -21,3 +21,5 @@ export const Button = ({ onClick, disabled, className, children }: Button) => {
     </button>
   );
 };
+
+export default Button;

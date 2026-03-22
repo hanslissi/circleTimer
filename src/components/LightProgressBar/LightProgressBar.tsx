@@ -10,7 +10,7 @@ type Props = {
   color?: "teal" | "autumn";
 };
 
-export const LightProgressBar = ({
+const LightProgressBar = ({
   value,
   min,
   max,
@@ -31,3 +31,5 @@ export const LightProgressBar = ({
     </div>
   );
 };
+
+export default LightProgressBar;

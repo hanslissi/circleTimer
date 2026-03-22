@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
+import WheelIndents from "./WheelIndents";
 import styles from "./Thumbwheel.module.css";
-import { WheelIndents } from "./WheelIndents/WheelIndents";
 import { useThumbwheel } from "./hooks/useThumbwheel";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
   color?: "teal" | "autumn";
 };
 
-export const Thumbwheel = ({
+const Thumbwheel = ({
   value,
   onChange,
   min = 0,
@@ -49,3 +49,5 @@ export const Thumbwheel = ({
     </div>
   );
 };
+
+export default Thumbwheel;

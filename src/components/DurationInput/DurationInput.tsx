@@ -26,7 +26,7 @@ type Props = {
   color?: "teal" | "autumn" | "graysky";
 };
 
-export const DurationInput = ({
+const DurationInput = ({
   value,
   onChange,
   min = 0,
@@ -127,3 +127,5 @@ export const DurationInput = ({
     </div>
   );
 };
+
+export default DurationInput;
