@@ -27,12 +27,13 @@
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
+      "@configs/*": ["./src/configs/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@state/*": ["./src/state/*"],
       "@app-types/*": ["./src/types/*"],
-      "@utils/*": ["./src/utils/*"],
-    },
+      "@utils/*": ["./src/utils/*"]
+    }
   },
   "include": ["src"]
 }

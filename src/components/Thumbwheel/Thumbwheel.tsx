@@ -29,7 +29,7 @@ const Thumbwheel = ({
   });
 
   return (
-    <div className={clsx(styles.metalSlant, "metalSlateOutdent")}>
+    <div className={clsx(styles.metalSlant, "metalSlantOutdent")}>
       <div className={clsx(styles.platform, "litPlatform")}>
         <div className={styles.thumbwheel}>
           <div

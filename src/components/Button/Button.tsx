@@ -16,7 +16,7 @@ const Button = ({ onClick, disabled, className, children }: Button) => {
       className={clsx(styles.button, className)}
     >
       <div className={styles.innerButton}>
-        <span>{children}</span>
+        <span className={"shinyTextDark"}>{children}</span>
       </div>
     </button>
   );

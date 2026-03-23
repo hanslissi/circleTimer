@@ -104,7 +104,7 @@ const DurationInput = ({
   };
 
   return (
-    <div className={clsx(styles.metalSlant, "metalSlateIndent")}>
+    <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
       <div className={clsx(styles.container, themeClassNames)}>
         <div className={styles.display}>
           <span className={styles.doubleDigit}>{placeholder}</span>

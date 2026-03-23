@@ -18,7 +18,7 @@
   position: relative;
   font-family: var(--f-segment);
   font-size: var(--f-size);
-  padding: var(--padding);
+  padding: var(--padding) calc(var(--padding) * 3);
   background-color: var(--c-background);
   color: var(--c-segment-faint);
   border-radius: var(--radius);
@@ -80,7 +80,7 @@
 
 .variantBig {
   --f-size: var(--f-size-2xl);
-  --padding: var(--gap-md);
+  --padding: var(--gap-sm);
   --gap: var(--gap-sm);
   --radius: var(--radius-md);
 }

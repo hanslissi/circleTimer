@@ -13,8 +13,12 @@ const Diode = ({ on = false, color = "teal" }: Props) => {
     [styles.glowingGraySky]: color === "graysky",
   });
   return (
-    <div className={clsx(styles.container, themeClassName, "litPlatform")}>
-      <div className={clsx(styles.diode, on && styles.on)} />
+    <div
+      className={clsx(styles.metalSlant, themeClassName, "metalSlantIndent")}
+    >
+      <div className={styles.container}>
+        <div className={clsx(styles.diode, on && styles.on)} />
+      </div>
     </div>
   );
 };
