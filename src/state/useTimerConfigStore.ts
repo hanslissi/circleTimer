@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { createTimerConfigSlice, type TimerConfigSlice } from "./timerConfigSlice";
+import { createTimerConfigSlice } from "./timerConfigSlice";
+import type { TimerConfigSlice } from "./timerConfigSlice.types";
 
 export const useTimerConfigStore = create<TimerConfigSlice>((...a) => ({
   ...createTimerConfigSlice(...a)

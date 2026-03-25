@@ -11,10 +11,14 @@ type Props = {
   onSelect: (stepIdx: number) => void;
 };
 
-const TimerStepDisplay = ({ stepIdx, selected, onSelect }: Props) => {
-  const timerStep = useTimerConfigStore((state) => state.timer.steps[stepIdx]);
-  const setWorkSeconds = useTimerConfigStore((state) => state.setWorkSeconds);
-  const setRestSeconds = useTimerConfigStore((state) => state.setRestSeconds);
+const TimerStepDisplay = ({
+  stepIdx,
+  selected,
+  onSelect,
+}: Props) => {
+  const timerStep = useTimerConfigStore((state) => state.steps[stepIdx]);
+  const setWorkSecondsStep = useTimerConfigStore((state) => state.setWorkSecondsStep);
+  const setRestSecondsStep = useTimerConfigStore((state) => state.setRestSecondsStep);
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantOutdent")}>
@@ -31,7 +35,7 @@ const TimerStepDisplay = ({ stepIdx, selected, onSelect }: Props) => {
               max={TIMER_CONFIG.maxSeconds}
               label="Work time"
               value={timerStep.workSeconds}
-              onChange={(value) => setWorkSeconds(stepIdx, value)}
+              onChange={(value) => setWorkSecondsStep(stepIdx, value)}
             />
           </div>
           <div className={styles.valueDisplayGroup}>
@@ -41,7 +45,7 @@ const TimerStepDisplay = ({ stepIdx, selected, onSelect }: Props) => {
               color="autumn"
               label="Rest time"
               value={timerStep.restSeconds}
-              onChange={(value) => setRestSeconds(stepIdx, value)}
+              onChange={(value) => setRestSecondsStep(stepIdx, value)}
             />
           </div>
         </div>
