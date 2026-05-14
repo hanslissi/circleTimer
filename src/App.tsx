@@ -2,12 +2,13 @@ import { clsx } from "clsx";
 import Thumbwheel from "@components/Thumbwheel";
 import Button from "@components/Button";
 import LightProgressBar from "@components/LightProgressBar";
-import DurationInput from "@components/DurationInput";
 import { useTimerConfigStore } from "@state/useTimerConfigStore";
 import TimerStepDisplay from "@components/TimerStepDisplay";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import { selectEditingStep } from "@state/timerConfigSlice.selectors";
 import { PageLayoutWrapper } from "@layouts/PageLayoutWrapper/PageLayoutWrapper";
+import TimerStepEdit from "@components/TimerStepEdit";
+import { DurationInput } from "@components/Duration";
 import styles from "./App.module.css";
 
 function App() {
@@ -35,9 +36,10 @@ function App() {
       <div className={styles.circleTimer}>
         <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
           <div className={styles.circleTimerDisplay}>
-            {timerSteps.map((_, stepIdx) => (
-              <TimerStepDisplay
-                stepIdx={stepIdx}
+            {/* <TimerStepDisplay /> */}
+            {timerSteps.map((step, stepIdx) => (
+              <TimerStepEdit
+                timerStep={step}
                 onSelect={toggleEditingStep}
                 selected={editingStepIdx === stepIdx}
               />

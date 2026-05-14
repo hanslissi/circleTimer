@@ -95,13 +95,18 @@ export function applyRemove(state: TimerConfigState): TimerConfigState {
 
 export function applyToggleEditingStep(
   state: TimerConfigState,
-  stepIdx: number,
+  step: TimerStep,
 ): TimerConfigState {
-  const editingStepIdx = state.editingStepIdx;
+  let updatedEditingStepIdx: number | undefined = state.steps.findIndex((s) => s === step);
+
+  // if step doesn't exist or already editing => no selection
+  if (updatedEditingStepIdx < 0 || updatedEditingStepIdx === state.editingStepIdx) {
+    updatedEditingStepIdx = undefined;
+  }
 
   return {
     ...state,
-    editingStepIdx: editingStepIdx === stepIdx ? undefined : stepIdx,
+    editingStepIdx: updatedEditingStepIdx,
   };
 }
 
@@ -152,42 +157,6 @@ export function applySetRestSeconds(
   return {
     ...state,
     steps: updateStep(state.steps, editingStepIdx, {
-      restSeconds: clampedSeconds,
-    }),
-  };
-}
-
-export function applySetWorkSecondsStep(
-  state: TimerConfigState,
-  stepIdx: number,
-  seconds: number,
-): TimerConfigState {
-  if (state.steps[stepIdx] === undefined) return state;
-
-  const clampedSeconds = clamp(seconds, 0, TIMER_CONFIG.maxSeconds);
-
-  // editing => set seconds of step that's being edited
-  return {
-    ...state,
-    steps: updateStep(state.steps, stepIdx, {
-      workSeconds: clampedSeconds,
-    }),
-  };
-}
-
-export function applySetRestSecondsStep(
-  state: TimerConfigState,
-  stepIdx: number,
-  seconds: number,
-): TimerConfigState {
-  if (state.steps[stepIdx] === undefined) return state;
-
-  const clampedSeconds = clamp(seconds, 0, TIMER_CONFIG.maxSeconds);
-
-  // editing => set seconds of step that's being edited
-  return {
-    ...state,
-    steps: updateStep(state.steps, stepIdx, {
       restSeconds: clampedSeconds,
     }),
   };

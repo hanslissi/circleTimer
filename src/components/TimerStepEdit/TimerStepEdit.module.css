@@ -1,0 +1,25 @@
+.metalSlant {
+  padding: 2px;
+  border-radius: 0.6rem;
+}
+
+.platform {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-md);
+  
+  padding: var(--gap-md);
+  border-radius: var(--radius-md);
+}
+
+.valueDisplay {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.valueDisplayGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}

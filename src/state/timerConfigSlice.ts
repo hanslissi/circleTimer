@@ -3,13 +3,12 @@ import {
   applyAdd,
   applyRemove,
   applySetRestSeconds,
-  applySetRestSecondsStep,
   applySetWorkSeconds,
-  applySetWorkSecondsStep,
   applyToggleEditingStep,
 } from "./timerConfigSlice.bl";
 import type { StateCreator } from "zustand";
 import type { TimerConfigSlice } from "./timerConfigSlice.types";
+import type { TimerStep } from "@app-types/Timer.types";
 
 export const createTimerConfigSlice: StateCreator<TimerConfigSlice> = (
   set,
@@ -21,19 +20,13 @@ export const createTimerConfigSlice: StateCreator<TimerConfigSlice> = (
   remove() {
     set((state) => applyRemove(state));
   },
-  toggleEditingStep(stepIdx: number) {
-    set((state) => applyToggleEditingStep(state, stepIdx));
+  toggleEditingStep(step: TimerStep) {
+    set((state) => applyToggleEditingStep(state, step));
   },
   setWorkSeconds(seconds) {
     set((state) => applySetWorkSeconds(state, seconds));
   },
   setRestSeconds(seconds) {
     set((state) => applySetRestSeconds(state, seconds));
-  },
-  setWorkSecondsStep(stepIdx, seconds) {
-    set((state) => applySetWorkSecondsStep(state, stepIdx, seconds));
-  },
-  setRestSecondsStep(stepIdx, seconds) {
-    set((state) => applySetRestSecondsStep(state, stepIdx, seconds));
   },
 });
