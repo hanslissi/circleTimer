@@ -18,6 +18,7 @@
   position: relative;
   font-family: var(--f-segment);
   font-size: var(--f-size);
+  width: fit-content;
   padding: var(--padding) calc(var(--padding) * 3);
   background-color: var(--c-background);
   color: var(--c-segment-faint);
@@ -29,7 +30,7 @@
   overflow: hidden;
 }
 
-.durationInput {
+.durationValue {
   font-family: inherit;
   font-size: inherit;
   background-color: unset;

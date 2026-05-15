@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent, type KeyboardEvent } from "react";
+import { memo, useRef, useState, type ChangeEvent, type KeyboardEvent } from "react";
 import { clsx } from "clsx";
 import { clamp } from "../../utils/mathUtils";
 import { useShiftToggle } from "../../hooks/useShiftToggle";
@@ -11,12 +11,10 @@ import {
   trimToPlaceholder,
 } from "../../utils/timeDisplayUtils";
 import { nudge as nudgeDetent } from "../../utils/inputUtils";
-import styles from "./DurationInput.module.css";
-import type { Predicate } from "../../utils/types";
+import styles from "./Duration.module.css";
 
 type Props = {
   value: number;
-  onChange?: Predicate<number>;
   min?: number;
   max?: number;
   smallNudgeAmount?: number;
@@ -24,11 +22,12 @@ type Props = {
   label?: string;
   size?: "big" | "small";
   color?: "teal" | "autumn" | "graysky";
+  onChange?: (value: number) => void;
+  onFocus?: () => void;
 };
 
-const DurationInput = ({
+const DurationInput = memo(function DurationInput ({
   value,
-  onChange,
   min = 0,
   max = 100,
   smallNudgeAmount = 1,
@@ -36,7 +35,9 @@ const DurationInput = ({
   label = "value",
   size = "big",
   color = "teal",
-}: Props) => {
+  onChange,
+  onFocus
+}: Props) {
   const themeClassNames = clsx(
     {
       [styles.glowingTeal]: color === "teal",
@@ -94,6 +95,7 @@ const DurationInput = ({
   };
 
   const handleFocus = () => {
+    onFocus?.();
     setIsFocused(true);
     setRaw(secondsToTimeDisplay(value));
   };
@@ -106,12 +108,12 @@ const DurationInput = ({
   return (
     <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
       <div className={clsx(styles.container, themeClassNames)}>
-        <div className={styles.display}>
+        <div className={styles.display} role="presentation">
           <span className={styles.doubleDigit}>{placeholder}</span>
         </div>
 
         <input
-          className={styles.durationInput}
+          className={styles.durationValue}
           ref={inputRef}
           aria-label={label}
           type="text"
@@ -126,6 +128,6 @@ const DurationInput = ({
       </div>
     </div>
   );
-};
+});
 
 export default DurationInput;

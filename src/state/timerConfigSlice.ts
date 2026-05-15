@@ -4,6 +4,7 @@ import {
   applyRemove,
   applySetRestSeconds,
   applySetWorkSeconds,
+  applySelectEditingStep,
   applyToggleEditingStep,
 } from "./timerConfigSlice.bl";
 import type { StateCreator } from "zustand";
@@ -19,6 +20,9 @@ export const createTimerConfigSlice: StateCreator<TimerConfigSlice> = (
   },
   remove() {
     set((state) => applyRemove(state));
+  },
+  selectEditingStep(step: TimerStep) {
+    set((state) => applySelectEditingStep(state, step));
   },
   toggleEditingStep(step: TimerStep) {
     set((state) => applyToggleEditingStep(state, step));

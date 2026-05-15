@@ -9,6 +9,7 @@ export type TimerConfigState = {
 export type TimerConfigActions = {
   add: () => void;
   remove: () => void;
+  selectEditingStep: (step: TimerStep) => void;
   toggleEditingStep: (step: TimerStep) => void;
   setWorkSeconds: (seconds: number) => void;
   setRestSeconds: (seconds: number) => void;

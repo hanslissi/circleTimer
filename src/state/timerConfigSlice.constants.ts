@@ -4,7 +4,7 @@ import type { TimerConfigState } from "./timerConfigSlice.types";
 export const initialDraftStep: TimerStep = {
   workSeconds: 0,
   restSeconds: 0,
-  repetitions: 0,
+  repetitions: 1,
 };
 
 export const initialState: TimerConfigState = {
