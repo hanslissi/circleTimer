@@ -4,6 +4,7 @@ import Diode from "@components/Diode";
 import { DurationInput } from "@components/Duration";
 import { useTimerConfigStore } from "@state/useTimerConfigStore";
 import TIMER_CONFIG from "@configs/timer.config.json";
+import LightProgressBar from "@components/LightProgressBar";
 import styles from "./TimerStepEdit.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
@@ -49,6 +50,7 @@ const TimerStepEdit = memo(function TimerStepEdit({
               onChange={setWorkSeconds}
               onFocus={handleSelect}
             />
+            <LightProgressBar min={0} max={100} value={100} variant="horizontal"/>
           </div>
           <div className={styles.valueDisplayGroup}>
             <DurationInput
@@ -60,6 +62,7 @@ const TimerStepEdit = memo(function TimerStepEdit({
               onChange={setRestSeconds}
               onFocus={handleSelect}
             />
+            <LightProgressBar min={0} max={100} value={40} color="autumn" variant="horizontal"/>
           </div>
         </div>
 
