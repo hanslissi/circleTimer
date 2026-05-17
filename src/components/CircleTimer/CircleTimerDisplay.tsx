@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { TimerStepDisplay } from "@components/TimerStep";
 import styles from "./CircleTimer.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
@@ -8,21 +9,24 @@ type Props = Readonly<{
 }>;
 
 const CircleTimerDisplay = ({ timerSteps }: Props) => {
-  const [remainingSeconds, setRemainingSeconds] = useState(() => timerSteps.reduce((total, step) =>
-    total + (step.workSeconds + step.restSeconds) * step.repetitions, 0))
+  const [activeTimerStepIdx, setActiveTimerStepIdx] = useState(0);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setRemainingSeconds((prev) => prev - 1);
-    }, 1000);
+  const handleStepEnd = useCallback(() => {
+    console.log("Yup ended");
+    setActiveTimerStepIdx((prev) => prev + 1);
+  }, [setActiveTimerStepIdx]);
 
-    return () => clearInterval(intervalId);
-  }, []);
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
-      <div className={styles.circleTimerContainer}>90deg
-        {remainingSeconds}
+      <div className={styles.circleTimerContainer}>
+        {timerSteps.map((timerStep, stepIdx) => (
+          <TimerStepDisplay 
+            active={stepIdx === activeTimerStepIdx}
+            timerStep={timerStep}
+            onStepEnd={handleStepEnd}
+          />
+        ))}
       </div>
     </div>
 

@@ -3,9 +3,9 @@ import { memo } from "react";
 import { Diode } from "@components/Diode";
 import { DurationInput } from "@components/Duration";
 import { useTimerConfigStore } from "@state/useTimerConfigStore";
-import TIMER_CONFIG from "@configs/timer.config.json";
 import { LightProgressBar } from "@components/LightProgressBar";
-import styles from "./TimerStepEdit.module.css";
+import TIMER_CONFIG from "@configs/timer.config.json";
+import styles from "./TimerStep.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
 type Props = Readonly<{
