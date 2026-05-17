@@ -3,13 +3,13 @@ import { progressOf } from "../../utils/mathUtils";
 import styles from "./LightProgressBar.module.css";
 import type { CSSProperties } from "react";
 
-type Props = {
+type Props = Readonly<{
   value: number;
   min: number;
   max: number;
   color?: "teal" | "autumn" | "graysky";
   variant?: "vertical" | "horizontal";
-};
+}>;
 
 const LightProgressBar = ({
   value,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Thumbwheel from "@components/Thumbwheel";
 import Button from "@components/Button";
-import LightProgressBar from "@components/LightProgressBar";
+import { LightProgressBar } from "@components/LightProgressBar";
 import { useTimerConfigStore } from "@state/useTimerConfigStore";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import { getEditingStep } from "@state/timerConfigSlice.selectors";

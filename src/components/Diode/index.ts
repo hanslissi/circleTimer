@@ -1,1 +1,1 @@
-export { default } from "./Diode";
+export { default as Diode } from "./Diode";

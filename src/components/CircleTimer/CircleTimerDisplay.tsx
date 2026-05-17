@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { useEffect, useState } from "react";
-import styles from "./CircleTimerEdit.module.css";
+import styles from "./CircleTimer.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
 type Props = Readonly<{
@@ -21,7 +21,7 @@ const CircleTimerDisplay = ({ timerSteps }: Props) => {
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
-      <div className={styles.circleTimerContainer}>
+      <div className={styles.circleTimerContainer}>90deg
         {remainingSeconds}
       </div>
     </div>

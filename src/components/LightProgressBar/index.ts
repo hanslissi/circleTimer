@@ -1,1 +1,1 @@
-export { default } from "./LightProgressBar";
+export { default as LightProgressBar } from "./LightProgressBar";
