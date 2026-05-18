@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@assets": path.resolve(__dirname, "./src/assets"),
+      "@audio": path.resolve(__dirname, "./src/audio"),
       "@components": path.resolve(__dirname, "./src/components"),
       "@configs": path.resolve(__dirname, "./src/configs"),
       "@hooks": path.resolve(__dirname, "./src/hooks"),

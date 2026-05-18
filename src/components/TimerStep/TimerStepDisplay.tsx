@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DurationDisplay } from "@components/Duration";
 import { Diode } from "@components/Diode";
 import TIMER_CONFIG from "@configs/timer.config.json";
@@ -18,7 +18,8 @@ type Props = Readonly<{
 
 const TimerStepDisplay = ({ timerStep, active, onWorkEnd, onRestEnd, onStepEnd }: Props) => {
   const [secondsPassed, setSecondsPassed] = useState(0);
-  const { workSecondsLeft, restSecondsLeft, repetitionsLeft } = calcCurrentTimerStep(secondsPassed, timerStep);
+  const { workSecondsLeft, restSecondsLeft, repetitionsLeft, phaseKey } = calcCurrentTimerStep(secondsPassed, timerStep);
+  const prevPhaseKey = useRef<string>(phaseKey);
 
   useEffect(() => {
     if (!active) {
@@ -33,16 +34,23 @@ const TimerStepDisplay = ({ timerStep, active, onWorkEnd, onRestEnd, onStepEnd }
   }, [active]);
 
   useEffect(() => {
-    console.log(workSecondsLeft, restSecondsLeft, repetitionsLeft);
-    if (repetitionsLeft === 0 && workSecondsLeft === 0 && restSecondsLeft === 0) {
-      onStepEnd?.();
-    } else if (workSecondsLeft === 0) {
-      onWorkEnd?.();
-    } else if (restSecondsLeft === 0) {
-      onRestEnd?.();
+    if (phaseKey === prevPhaseKey.current) {
+      return;
     }
-  }, [workSecondsLeft, restSecondsLeft, repetitionsLeft, onStepEnd, onWorkEnd, onRestEnd]);
+    prevPhaseKey.current = phaseKey;
 
+    switch (phaseKey) {
+      case "work":
+        onRestEnd?.();
+        break;
+      case "rest":
+        onWorkEnd?.();
+        break;
+      case "done":
+        onStepEnd?.();
+        break;
+    }
+  }, [phaseKey, onWorkEnd, onRestEnd, onStepEnd]);
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantOutdent")}>
