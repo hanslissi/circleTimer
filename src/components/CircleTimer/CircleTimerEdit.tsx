@@ -1,6 +1,6 @@
 import { clsx }  from "clsx";
 import { TimerStepEdit } from "@components/TimerStep";
-import { useTimerConfigStore } from "@state/useTimerConfigStore";
+import { useTimerConfigStore } from "@state/timerConfig/useTimerConfigStore";
 import styles from "./CircleTimer.module.css"; 
 
 const CircleTimerEdit = () => {
