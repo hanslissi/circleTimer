@@ -3,6 +3,10 @@
   border-radius: var(--size-md);
 }
 
+.buttonNoPadding {
+  padding: 0;
+}
+
 .platform {
   display: flex;
   justify-content: space-between;

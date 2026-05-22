@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import { memo } from "react";
 import { Diode } from "@components/Diode";
-import { DurationInput } from "@components/Duration";
+import { DurationInput } from "@components/input/Duration";
 import { LightProgressBar } from "@components/LightProgressBar";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import styles from "./TimerStep.module.css";
@@ -36,9 +36,9 @@ const TimerStepEdit = memo(function TimerStepEdit({
     <div className={clsx(styles.metalSlant, "metalSlantOutdent")}>
       <div
         className={clsx(styles.platform, "litPlatform")}
+        onClick={handleToggleSelect}
       >
         <div className={styles.valueDisplay}>
-          <button onClick={handleToggleSelect}>toggle select</button>
           <Diode on={selected} />
 
           <div className={styles.valueDisplayGroup}>

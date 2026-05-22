@@ -1,8 +1,8 @@
 import { clsx } from "clsx";
 import {
   getPlaceholderTimeDisplay,
+  secondsToText,
   secondsToTimeDisplay,
-  timeDisplayToText,
 } from "@utils/timeDisplayUtils";
 import styles from "./Duration.module.css";
 
@@ -40,7 +40,7 @@ const DurationDisplay = ({
     <div
       className={clsx(styles.metalSlant, "metalSlantIndent")}
       role="timer"
-      aria-valuetext={timeDisplayToText(displayValue)}
+      aria-valuetext={secondsToText(value)}
     >
       <div className={clsx(styles.container, themeClassNames)}>
         <div className={styles.display} role="presentation">

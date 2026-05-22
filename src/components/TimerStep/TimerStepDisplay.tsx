@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { useEffect, useRef } from "react";
-import { DurationDisplay } from "@components/Duration";
+import { DurationDisplay } from "@components/input/Duration";
 import { Diode } from "@components/Diode";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import { LightProgressBar } from "@components/LightProgressBar";

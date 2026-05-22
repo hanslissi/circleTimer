@@ -74,6 +74,19 @@ export function timeDisplayToText(timeDisplay: string): string {
   return textParts.join(" ");
 }
 
+export function secondsToText(seconds: number): string {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor(seconds / 60) % 60;
+  const s = seconds % 60;
+
+  const textParts = [];
+  if (h > 0) textParts.push(`${h} ${getHoursSuffix(h)}`);
+  if (m > 0) textParts.push(`${m} ${getMinutesSuffix(m)}`);
+  textParts.push(`${s} ${getSecondsSuffix(s)}`);
+
+  return textParts.join(" ");
+}
+
 export function getHoursSuffix(hours: number): string {
   return hours === 1 ? "hour" : "hours";
 }
@@ -88,18 +101,4 @@ export function getSecondsSuffix(seconds: number): string {
 
 export function getPlaceholderTimeDisplay(maxSeconds: number): string {
   return secondsToTimeDisplay(maxSeconds).replaceAll(/[0-9]/g, "0");
-}
-
-export function trimToPlaceholder(
-  timeDisplay: string,
-  placeholder: string,
-): string {
-  const maxDigits = placeholder.replaceAll(":", "").length;
-  const durationDigits = timeDisplayToDurationDigits(timeDisplay);
-  return durationDigitsToTimeDisplay(
-    durationDigits.substring(
-      durationDigits.length - maxDigits,
-      durationDigits.length,
-    ),
-  );
 }
