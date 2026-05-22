@@ -4,7 +4,7 @@ import {
   secondsToText,
   secondsToTimeDisplay,
 } from "@utils/timeDisplayUtils";
-import styles from "./Duration.module.css";
+import styles from "../styles/Input.module.css";
 
 type Props = {
   value: number;
@@ -14,13 +14,7 @@ type Props = {
   color?: "teal" | "autumn" | "graysky";
 };
 
-const DurationDisplay = ({
-  value,
-  min = 0,
-  max = 100,
-  size = "big",
-  color = "teal",
-}: Props) => {
+const DurationDisplay = ({ value, min = 0, max = 100, size = "big", color = "teal" }: Props) => {
   const themeClassNames = clsx(
     {
       [styles.glowingTeal]: color === "teal",
@@ -44,7 +38,7 @@ const DurationDisplay = ({
     >
       <div className={clsx(styles.container, themeClassNames)}>
         <div className={styles.display} role="presentation">
-          <span className={styles.doubleDigit}>{placeholder}</span>
+          {placeholder}
         </div>
 
         <span className={styles.durationValue}>{displayValue}</span>

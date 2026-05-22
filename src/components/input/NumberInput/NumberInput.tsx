@@ -1,6 +1,6 @@
 import { memo, type ChangeEvent } from "react";
 import { clsx } from "clsx";
-import styles from "../Duration/Duration.module.css";
+import styles from "../styles/Input.module.css";
 import { useRawNumericInput } from "../hooks/useRawNumericInput";
 
 type Props = {
@@ -72,7 +72,7 @@ const NumberInput = memo(function NumberInput({
     <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
       <div className={clsx(styles.container, themeClassNames)}>
         <div className={styles.display} role="presentation">
-          <span className={styles.doubleDigit}>{placeholder}</span>
+          {placeholder}
         </div>
         <input
           className={styles.durationValue}

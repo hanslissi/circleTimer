@@ -8,7 +8,7 @@ import {
   timeDisplayToSeconds,
 } from "@utils/timeDisplayUtils";
 import { useRawNumericInput } from "../hooks/useRawNumericInput";
-import styles from "./Duration.module.css";
+import styles from "../styles/Input.module.css";
 
 type Props = {
   value: number;
@@ -72,7 +72,7 @@ const DurationInput = memo(function DurationInput({
     <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
       <div className={clsx(styles.container, themeClassNames)}>
         <div className={styles.display} role="presentation">
-          <span className={styles.doubleDigit}>{placeholder}</span>
+          {placeholder}
         </div>
 
         <input
