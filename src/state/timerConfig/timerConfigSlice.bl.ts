@@ -20,16 +20,11 @@ export function deleteStep(steps: TimerStep[], stepIdx: number): TimerStep[] {
   return [...steps.slice(0, stepIdx), ...steps.slice(stepIdx + 1)];
 }
 
-export function appendStep(
-  steps: TimerStep[],
-  newStep: TimerStep,
-): TimerStep[] {
+export function appendStep(steps: TimerStep[], newStep: TimerStep): TimerStep[] {
   return [...steps, { ...newStep }];
 }
 
-export function isEditingDraft(
-  editingStepIdx: number | undefined,
-): editingStepIdx is undefined {
+export function isEditingDraft(editingStepIdx: number | undefined): editingStepIdx is undefined {
   return editingStepIdx === undefined;
 }
 
@@ -107,10 +102,7 @@ export function applySelectEditingStep(state: TimerConfigState, step: TimerStep)
   };
 }
 
-export function applyToggleEditingStep(
-  state: TimerConfigState,
-  step: TimerStep,
-): TimerConfigState {
+export function applyToggleEditingStep(state: TimerConfigState, step: TimerStep): TimerConfigState {
   let updatedEditingStepIdx: number | undefined = state.steps.findIndex((s) => s === step);
 
   // if step doesn't exist or already editing => no selection
@@ -124,10 +116,7 @@ export function applyToggleEditingStep(
   };
 }
 
-export function applySetWorkSeconds(
-  state: TimerConfigState,
-  seconds: number,
-): TimerConfigState {
+export function applySetWorkSeconds(state: TimerConfigState, seconds: number): TimerConfigState {
   const editingStepIdx = state.editingStepIdx;
   const clampedSeconds = clamp(seconds, 0, TIMER_CONFIG.maxSeconds);
 
@@ -150,10 +139,7 @@ export function applySetWorkSeconds(
   };
 }
 
-export function applySetRestSeconds(
-  state: TimerConfigState,
-  seconds: number,
-): TimerConfigState {
+export function applySetRestSeconds(state: TimerConfigState, seconds: number): TimerConfigState {
   const editingStepIdx = state.editingStepIdx;
   const clampedSeconds = clamp(seconds, 0, TIMER_CONFIG.maxSeconds);
 

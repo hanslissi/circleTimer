@@ -11,9 +11,7 @@ import type { StateCreator } from "zustand";
 import type { TimerConfigSlice } from "./timerConfigSlice.types";
 import type { TimerStep } from "@app-types/Timer.types";
 
-export const createTimerConfigSlice: StateCreator<TimerConfigSlice> = (
-  set,
-) => ({
+export const createTimerConfigSlice: StateCreator<TimerConfigSlice> = (set) => ({
   ...initialState,
   add() {
     set((state) => applyAdd(state));
