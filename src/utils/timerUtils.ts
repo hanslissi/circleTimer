@@ -8,7 +8,7 @@ export function calcCurrentTimerStep(secondsPassed: number, timerStep: TimerStep
   const repetitionsLeft = Math.max(repetitions - repetitionsDone, 0);
   const isDone = repetitionsLeft <= 0;
 
-  const secondsIntoCurrentRep = !isDone ? (secondsPassed % secondsPerRep) : Infinity;
+  const secondsIntoCurrentRep = !isDone ? secondsPassed % secondsPerRep : Infinity;
 
   const workSecondsLeft = Math.max(workSeconds - secondsIntoCurrentRep, 0);
   const isInWork = workSecondsLeft > 0;
@@ -23,6 +23,10 @@ export function calcCurrentTimerStep(secondsPassed: number, timerStep: TimerStep
     workSecondsLeft,
     restSecondsLeft,
     repetitionsLeft,
-    phaseKey
+    phaseKey,
   };
+}
+
+export function calcStepDuration(timerStep: TimerStep) {
+  return (timerStep.workSeconds + timerStep.restSeconds) * timerStep.repetitions;
 }

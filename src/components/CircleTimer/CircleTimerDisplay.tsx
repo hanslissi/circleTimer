@@ -1,7 +1,9 @@
 import { clsx } from "clsx";
 import { useCallback, useState } from "react";
-import { jazzWorkAudio, jazzRestAudio } from "@audio/timerAudios";
+import { timerAudio } from "@audio/timerAudios";
 import { TimerStepDisplay } from "@components/TimerStep";
+import { calcStepDuration } from "@utils/timerUtils";
+import { useStopwatchStore } from "@state/stopwatch/useStopwatchStore";
 import styles from "./CircleTimer.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
@@ -10,40 +12,57 @@ type Props = Readonly<{
 }>;
 
 const CircleTimerDisplay = ({ timerSteps }: Props) => {
+  const secondsPassed = useStopwatchStore((state) => state.secondsPassed);
+  const stopStopwatch = useStopwatchStore((state) => state.stop);
   const [activeTimerStepIdx, setActiveTimerStepIdx] = useState(0);
 
   const handleStepEnd = useCallback(() => {
-    console.log("Yup ended");
-    setActiveTimerStepIdx((prev) => prev + 1);
-    jazzRestAudio.play();
-  }, [setActiveTimerStepIdx]);
+    if (activeTimerStepIdx >= timerSteps.length - 1) {
+      setActiveTimerStepIdx(0);
+      stopStopwatch();
+    } else {
+      setActiveTimerStepIdx((prev) => prev + 1);
+    }
+    timerAudio.playRest();
+  }, [activeTimerStepIdx, setActiveTimerStepIdx, timerSteps.length, stopStopwatch]);
 
   const handleWorkEnd = useCallback(() => {
-    console.log("doing it work")
-    jazzWorkAudio.play();
+    timerAudio.playWork();
   }, []);
 
   const handleRestEnd = useCallback(() => {
-    console.log("doing it rest")
-    jazzRestAudio.play();
+    timerAudio.playRest();
   }, []);
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
       <div className={styles.circleTimerContainer}>
-        {timerSteps.map((timerStep, stepIdx) => (
-          <TimerStepDisplay
-            active={stepIdx === activeTimerStepIdx}
-            timerStep={timerStep}
-            onStepEnd={handleStepEnd}
-            onWorkEnd={handleWorkEnd}
-            onRestEnd={handleRestEnd}
-          />
-        ))}
+        {timerSteps.map((timerStep, stepIdx) => {
+          // TODO: This is not efficient at all just shitty API design...
+          const secondsBeforeThisStep = timerSteps
+            .slice(0, stepIdx)
+            .reduce((acc, s) => acc + calcStepDuration(s), 0);
+
+          const secondsPassedForStep = Math.max(
+            Math.min(secondsPassed - secondsBeforeThisStep, calcStepDuration(timerStep)),
+            0,
+          );
+
+          return (
+            <TimerStepDisplay
+              key={stepIdx}
+              active={stepIdx === activeTimerStepIdx}
+              timerStep={timerStep}
+              secondsPassed={secondsPassedForStep}
+              onStepEnd={handleStepEnd}
+              onWorkEnd={handleWorkEnd}
+              onRestEnd={handleRestEnd}
+            />
+          );
+        })}
       </div>
     </div>
-
   );
-}
+};
 
 export default CircleTimerDisplay;

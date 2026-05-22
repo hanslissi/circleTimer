@@ -2,7 +2,6 @@ import { clsx } from "clsx";
 import { memo } from "react";
 import { Diode } from "@components/Diode";
 import { DurationInput } from "@components/Duration";
-import { useTimerConfigStore } from "@state/timerConfig/useTimerConfigStore";
 import { LightProgressBar } from "@components/LightProgressBar";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import styles from "./TimerStep.module.css";
@@ -13,17 +12,18 @@ type Props = Readonly<{
   selected: boolean;
   onSelect: (timerStep: TimerStep) => void;
   onToggleSelect: (timerStep: TimerStep) => void;
+  onWorkSecondsChange: (seconds: number) => void;
+  onRestSecondsChange: (seconds: number) => void;
 }>;
 
 const TimerStepEdit = memo(function TimerStepEdit({
   timerStep,
   selected,
   onSelect,
-  onToggleSelect
+  onToggleSelect,
+  onWorkSecondsChange,
+  onRestSecondsChange
 }: Props) {
-  const setWorkSeconds = useTimerConfigStore((state) => state.setWorkSeconds);
-  const setRestSeconds = useTimerConfigStore((state) => state.setRestSeconds);
-
   const handleSelect = () => {
     onSelect(timerStep);
   }
@@ -47,7 +47,7 @@ const TimerStepEdit = memo(function TimerStepEdit({
               max={TIMER_CONFIG.maxSeconds}
               label="Work time"
               value={timerStep.workSeconds}
-              onChange={setWorkSeconds}
+              onChange={onWorkSecondsChange}
               onFocus={handleSelect}
             />
             <LightProgressBar min={0} max={1} value={1} variant="horizontal"/>
@@ -59,7 +59,7 @@ const TimerStepEdit = memo(function TimerStepEdit({
               color="autumn"
               label="Rest time"
               value={timerStep.restSeconds}
-              onChange={setRestSeconds}
+              onChange={onRestSecondsChange}
               onFocus={handleSelect}
             />
             <LightProgressBar min={0} max={1} value={1} color="autumn" variant="horizontal"/>

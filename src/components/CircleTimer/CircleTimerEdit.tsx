@@ -10,6 +10,8 @@ const CircleTimerEdit = () => {
     (state) => state.toggleEditingStep,
   );
   const selectEditingStep = useTimerConfigStore((state) => state.selectEditingStep);
+  const setWorkSeconds = useTimerConfigStore((state) => state.setWorkSeconds);
+  const setRestSeconds = useTimerConfigStore((state) => state.setRestSeconds);
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
@@ -20,6 +22,8 @@ const CircleTimerEdit = () => {
             selected={editingStepIdx === stepIdx}
             onSelect={selectEditingStep}
             onToggleSelect={toggleEditingStep}
+            onWorkSecondsChange={setWorkSeconds}
+            onRestSecondsChange={setRestSeconds}
           />
         ))}
       </div>

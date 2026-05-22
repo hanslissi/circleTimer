@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Thumbwheel from "@components/Thumbwheel";
 import Button from "@components/Button";
 import { LightProgressBar } from "@components/LightProgressBar";
@@ -9,10 +8,13 @@ import { PageLayoutWrapper } from "@layouts/PageLayoutWrapper/PageLayoutWrapper"
 import { DurationInput } from "@components/Duration";
 import CircleTimerEdit from "@components/CircleTimer/CircleTimerEdit";
 import CircleTimerDisplay from "@components/CircleTimer/CircleTimerDisplay";
+import { useStopwatchStore } from "@state/stopwatch/useStopwatchStore";
 import styles from "./App.module.css";
 
 function App() {
-  const [isStarted, setIsStarted] = useState(false);
+  const isStopwatchRunning = useStopwatchStore((state) => state.isRunning);
+  const startStopwatch = useStopwatchStore((state) => state.start);
+  const stopStopwatch = useStopwatchStore((state) => state.stop);
   const timerSteps = useTimerConfigStore((state) => state.steps);
   const editingStep = useTimerConfigStore(getEditingStep);
   const addAction = useTimerConfigStore((state) => state.add);
@@ -28,14 +30,10 @@ function App() {
     setRestSeconds(seconds);
   };
 
-  const handleToggleTimer = () => {
-    setIsStarted((prev) => !prev);
-  };
-
   return (
     <PageLayoutWrapper>
       <div className={styles.circleTimer}>
-        {isStarted ? <CircleTimerDisplay timerSteps={timerSteps} /> : <CircleTimerEdit />}
+        {isStopwatchRunning ? <CircleTimerDisplay timerSteps={timerSteps} /> : <CircleTimerEdit />}
         <div className={styles.interfaceSection}>
           <div className={styles.timeDisplaysSection}>
             <DurationInput
@@ -91,8 +89,8 @@ function App() {
             <Button onClick={removeAction} className={styles.button}>
               Remove
             </Button>
-            <Button onClick={handleToggleTimer} className={styles.button}>
-              {isStarted ? "Stop" : "Start"}
+            <Button onClick={isStopwatchRunning ? stopStopwatch : startStopwatch} className={styles.button}>
+              {isStopwatchRunning ? "Stop" : "Start"}
             </Button>
           </div>
         </div>

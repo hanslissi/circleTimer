@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { DurationDisplay } from "@components/Duration";
 import { Diode } from "@components/Diode";
 import TIMER_CONFIG from "@configs/timer.config.json";
@@ -9,29 +9,17 @@ import styles from "./TimerStep.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
 type Props = Readonly<{
-  timerStep: TimerStep;
   active: boolean;
+  timerStep: TimerStep;
+  secondsPassed: number;
   onWorkEnd?: () => void;
   onRestEnd?: () => void;
   onStepEnd?: () => void;
 }>;
 
-const TimerStepDisplay = ({ timerStep, active, onWorkEnd, onRestEnd, onStepEnd }: Props) => {
-  const [secondsPassed, setSecondsPassed] = useState(0);
+const TimerStepDisplay = ({ active, timerStep, secondsPassed, onWorkEnd, onRestEnd, onStepEnd }: Props) => {
   const { workSecondsLeft, restSecondsLeft, repetitionsLeft, phaseKey } = calcCurrentTimerStep(secondsPassed, timerStep);
   const prevPhaseKey = useRef<string>(phaseKey);
-
-  useEffect(() => {
-    if (!active) {
-      return;
-    }
-
-    const intervalId = setInterval(() => {
-      setSecondsPassed((prev) => prev + 1);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [active]);
 
   useEffect(() => {
     if (phaseKey === prevPhaseKey.current) {
