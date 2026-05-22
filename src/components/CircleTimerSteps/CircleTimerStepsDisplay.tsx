@@ -1,10 +1,9 @@
-import { clsx } from "clsx";
 import { useCallback, useState } from "react";
 import { timerAudio } from "@audio/timerAudios";
 import { TimerStepDisplay } from "@components/TimerStep";
 import { calcStepDuration } from "@utils/timerUtils";
 import { useStopwatchStore } from "@state/stopwatch/useStopwatchStore";
-import styles from "./CircleTimer.module.css";
+import styles from "./CircleTimerSteps.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
 type Props = Readonly<{
@@ -35,32 +34,30 @@ const CircleTimerDisplay = ({ timerSteps }: Props) => {
   }, []);
 
   return (
-    <div className={clsx(styles.metalSlant, "metalSlantIndent")}>
-      <div className={styles.circleTimerContainer}>
-        {timerSteps.map((timerStep, stepIdx) => {
-          // TODO: This is not efficient at all just shitty API design...
-          const secondsBeforeThisStep = timerSteps
-            .slice(0, stepIdx)
-            .reduce((acc, s) => acc + calcStepDuration(s), 0);
+    <div className={styles.circleTimerContainer}>
+      {timerSteps.map((timerStep, stepIdx) => {
+        // TODO: This is not efficient at all just shitty API design...
+        const secondsBeforeThisStep = timerSteps
+          .slice(0, stepIdx)
+          .reduce((acc, s) => acc + calcStepDuration(s), 0);
 
-          const secondsPassedForStep = Math.max(
-            Math.min(secondsPassed - secondsBeforeThisStep, calcStepDuration(timerStep)),
-            0,
-          );
+        const secondsPassedForStep = Math.max(
+          Math.min(secondsPassed - secondsBeforeThisStep, calcStepDuration(timerStep)),
+          0,
+        );
 
-          return (
-            <TimerStepDisplay
-              key={stepIdx}
-              active={stepIdx === activeTimerStepIdx}
-              timerStep={timerStep}
-              secondsPassed={secondsPassedForStep}
-              onStepEnd={handleStepEnd}
-              onWorkEnd={handleWorkEnd}
-              onRestEnd={handleRestEnd}
-            />
-          );
-        })}
-      </div>
+        return (
+          <TimerStepDisplay
+            key={stepIdx}
+            active={stepIdx === activeTimerStepIdx}
+            timerStep={timerStep}
+            secondsPassed={secondsPassedForStep}
+            onStepEnd={handleStepEnd}
+            onWorkEnd={handleWorkEnd}
+            onRestEnd={handleRestEnd}
+          />
+        );
+      })}
     </div>
   );
 };

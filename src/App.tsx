@@ -6,8 +6,8 @@ import TIMER_CONFIG from "@configs/timer.config.json";
 import { getEditingStep } from "@state/timerConfig/timerConfigSlice.selectors";
 import { PageLayoutWrapper } from "@layouts/PageLayoutWrapper/PageLayoutWrapper";
 import { DurationInput } from "@components/Duration";
-import CircleTimerEdit from "@components/CircleTimer/CircleTimerEdit";
-import CircleTimerDisplay from "@components/CircleTimer/CircleTimerDisplay";
+import CircleTimerStepsEdit from "@components/CircleTimerSteps/CircleTimerStepsEdit";
+import CircleTimerStepsDisplay from "@components/CircleTimerSteps/CircleTimerStepsDisplay";
 import { useStopwatchStore } from "@state/stopwatch/useStopwatchStore";
 import styles from "./App.module.css";
 
@@ -33,7 +33,13 @@ function App() {
   return (
     <PageLayoutWrapper>
       <div className={styles.circleTimer}>
-        {isStopwatchRunning ? <CircleTimerDisplay timerSteps={timerSteps} /> : <CircleTimerEdit />}
+        <div className={styles.timerStepsSection}>
+          {isStopwatchRunning ? (
+            <CircleTimerStepsDisplay timerSteps={timerSteps} />
+          ) : (
+            <CircleTimerStepsEdit />
+          )}
+        </div>
         <div className={styles.interfaceSection}>
           <div className={styles.timeDisplaysSection}>
             <DurationInput
@@ -89,7 +95,10 @@ function App() {
             <Button onClick={removeAction} className={styles.button}>
               Remove
             </Button>
-            <Button onClick={isStopwatchRunning ? stopStopwatch : startStopwatch} className={styles.button}>
+            <Button
+              onClick={isStopwatchRunning ? stopStopwatch : startStopwatch}
+              className={styles.button}
+            >
               {isStopwatchRunning ? "Stop" : "Start"}
             </Button>
           </div>

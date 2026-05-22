@@ -4,7 +4,6 @@
   min-height: 500px;
   box-sizing: border-box;
   padding: var(--gap-md);
-  overflow: hidden;
 
   background: linear-gradient(
       color-mix(in srgb, var(--c-graysky-950) 50%, transparent),
