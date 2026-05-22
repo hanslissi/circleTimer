@@ -51,12 +51,7 @@ const TimerStepEdit = memo(function TimerStepEdit({
               onChange={onWorkSecondsChange}
               onFocus={handleSelect}
             />
-            <LightProgressBar
-              min={TIMER_CONFIG.minSeconds}
-              max={1}
-              value={1}
-              variant="horizontal"
-            />
+            <LightProgressBar min={0} max={1} value={1} variant="horizontal" />
           </div>
           <div className={styles.valueDisplayGroup}>
             <DurationInput
