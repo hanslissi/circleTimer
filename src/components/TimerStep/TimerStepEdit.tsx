@@ -37,9 +37,9 @@ const TimerStepEdit = memo(function TimerStepEdit({
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantOutdent")}>
-      <div className={clsx(styles.platform, "litPlatform")} onClick={handleToggleSelect}>
+      <div className={clsx(styles.platform, "litPlatform")}>
         <div className={styles.valueDisplay}>
-          <Diode on={selected} />
+          <Diode on={selected} onClick={handleToggleSelect} />
 
           <div className={styles.valueDisplayGroup}>
             <DurationInput

@@ -89,16 +89,9 @@ function App() {
             </div>
           </div>
           <div className={styles.buttonsSection}>
-            <Button onClick={addAction} className={styles.button}>
-              Add
-            </Button>
-            <Button onClick={removeAction} className={styles.button}>
-              Remove
-            </Button>
-            <Button
-              onClick={isStopwatchRunning ? stopStopwatch : startStopwatch}
-              className={styles.button}
-            >
+            <Button onClick={addAction}>Add</Button>
+            <Button onClick={removeAction}>Remove</Button>
+            <Button onClick={isStopwatchRunning ? stopStopwatch : startStopwatch}>
               {isStopwatchRunning ? "Stop" : "Start"}
             </Button>
           </div>

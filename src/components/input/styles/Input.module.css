@@ -1,6 +1,6 @@
 .metalSlant {
   padding: 2px;
-  border-radius: var(--size-md);
+  border-radius: var(--radius-md);
 }
 
 .container {
