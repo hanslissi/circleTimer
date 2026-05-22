@@ -13,6 +13,7 @@ export type TimerConfigActions = {
   toggleEditingStep: (step: TimerStep) => void;
   setWorkSeconds: (seconds: number) => void;
   setRestSeconds: (seconds: number) => void;
+  setRepetitions: (repetitions: number) => void;
 };
 
 export type TimerConfigSlice = TimerConfigState & TimerConfigActions;

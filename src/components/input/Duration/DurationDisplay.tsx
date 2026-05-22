@@ -1,26 +1,25 @@
 import { clsx } from "clsx";
+import { memo } from "react";
 import {
   getPlaceholderTimeDisplay,
+  secondsToText,
   secondsToTimeDisplay,
-  timeDisplayToText,
 } from "@utils/timeDisplayUtils";
-import styles from "./Duration.module.css";
+import styles from "../styles/Input.module.css";
 
 type Props = {
   value: number;
-  min?: number;
   max?: number;
   size?: "big" | "small";
   color?: "teal" | "autumn" | "graysky";
 };
 
-const DurationDisplay = ({
+const DurationDisplay = memo(function DurationDisplay({
   value,
-  min = 0,
   max = 100,
   size = "big",
   color = "teal",
-}: Props) => {
+}: Props) {
   const themeClassNames = clsx(
     {
       [styles.glowingTeal]: color === "teal",
@@ -40,17 +39,17 @@ const DurationDisplay = ({
     <div
       className={clsx(styles.metalSlant, "metalSlantIndent")}
       role="timer"
-      aria-valuetext={timeDisplayToText(displayValue)}
+      aria-valuetext={secondsToText(value)}
     >
       <div className={clsx(styles.container, themeClassNames)}>
         <div className={styles.display} role="presentation">
-          <span className={styles.doubleDigit}>{placeholder}</span>
+          {placeholder}
         </div>
 
         <span className={styles.durationValue}>{displayValue}</span>
       </div>
     </div>
   );
-};
+});
 
 export default DurationDisplay;

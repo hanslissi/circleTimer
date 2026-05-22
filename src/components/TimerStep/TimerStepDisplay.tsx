@@ -1,10 +1,11 @@
 import { clsx } from "clsx";
-import { useEffect, useRef } from "react";
-import { DurationDisplay } from "@components/Duration";
+import { memo, useEffect, useRef } from "react";
+import { DurationDisplay } from "@components/input/Duration";
 import { Diode } from "@components/Diode";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import { LightProgressBar } from "@components/LightProgressBar";
 import { calcCurrentTimerStep } from "@utils/timerUtils";
+import { NumberDisplay } from "@components/input/Number";
 import styles from "./TimerStep.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
@@ -17,8 +18,18 @@ type Props = Readonly<{
   onStepEnd?: () => void;
 }>;
 
-const TimerStepDisplay = ({ active, timerStep, secondsPassed, onWorkEnd, onRestEnd, onStepEnd }: Props) => {
-  const { workSecondsLeft, restSecondsLeft, repetitionsLeft, phaseKey } = calcCurrentTimerStep(secondsPassed, timerStep);
+const TimerStepDisplay = memo(function TimerStepDisplay({
+  active,
+  timerStep,
+  secondsPassed,
+  onWorkEnd,
+  onRestEnd,
+  onStepEnd,
+}: Props) {
+  const { workSecondsLeft, restSecondsLeft, repetitionsLeft, phaseKey } = calcCurrentTimerStep(
+    secondsPassed,
+    timerStep,
+  );
   const prevPhaseKey = useRef<string>(phaseKey);
 
   useEffect(() => {
@@ -42,40 +53,56 @@ const TimerStepDisplay = ({ active, timerStep, secondsPassed, onWorkEnd, onRestE
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantOutdent")}>
-      <div
-        className={clsx(styles.platform, "litPlatform")}
-      >
+      <div className={clsx(styles.platform, "litPlatform")}>
         <div className={styles.valueDisplay}>
           <Diode on={active} />
 
           <div className={styles.valueDisplayGroup}>
-            <DurationDisplay
+            <DurationDisplay size="small" max={TIMER_CONFIG.maxSeconds} value={workSecondsLeft} />
+            <LightProgressBar
               min={0}
-              max={TIMER_CONFIG.maxSeconds}
+              max={timerStep.workSeconds}
               value={workSecondsLeft}
+              variant="horizontal"
             />
-            <LightProgressBar min={0} max={timerStep.workSeconds} value={workSecondsLeft} variant="horizontal" />
           </div>
           <div className={styles.valueDisplayGroup}>
             <DurationDisplay
-              min={0}
-              max={TIMER_CONFIG.maxSeconds}
               color="autumn"
+              size="small"
+              max={TIMER_CONFIG.maxSeconds}
               value={restSecondsLeft}
             />
-            <LightProgressBar min={0} max={timerStep.restSeconds} value={restSecondsLeft} color="autumn" variant="horizontal" />
+            <LightProgressBar
+              min={0}
+              max={timerStep.restSeconds}
+              value={restSecondsLeft}
+              color="autumn"
+              variant="horizontal"
+            />
           </div>
         </div>
 
         <div className={styles.valueDisplay}>
-          <span className={"shinyTextLight"}>
-            Repetitions: {repetitionsLeft}/{timerStep.repetitions}
-          </span>
-          <div className={styles.valueDisplayGroup}></div>
+          <div className={styles.valueDisplayGroup}>
+            <NumberDisplay
+              color="graysky"
+              size="small"
+              max={TIMER_CONFIG.maxRepetitions}
+              value={repetitionsLeft}
+            />
+            <LightProgressBar
+              min={0}
+              max={timerStep.repetitions}
+              value={repetitionsLeft}
+              color="graysky"
+              variant="horizontal"
+            />
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+});
 
-export default TimerStepDisplay; 
+export default TimerStepDisplay;

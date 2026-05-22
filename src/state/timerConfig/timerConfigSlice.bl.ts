@@ -118,7 +118,7 @@ export function applyToggleEditingStep(state: TimerConfigState, step: TimerStep)
 
 export function applySetWorkSeconds(state: TimerConfigState, seconds: number): TimerConfigState {
   const editingStepIdx = state.editingStepIdx;
-  const clampedSeconds = clamp(seconds, 0, TIMER_CONFIG.maxSeconds);
+  const clampedSeconds = clamp(seconds, TIMER_CONFIG.minSeconds, TIMER_CONFIG.maxSeconds);
 
   // drafting => set seconds of draft
   if (isEditingDraft(editingStepIdx)) {
@@ -141,7 +141,7 @@ export function applySetWorkSeconds(state: TimerConfigState, seconds: number): T
 
 export function applySetRestSeconds(state: TimerConfigState, seconds: number): TimerConfigState {
   const editingStepIdx = state.editingStepIdx;
-  const clampedSeconds = clamp(seconds, 0, TIMER_CONFIG.maxSeconds);
+  const clampedSeconds = clamp(seconds, TIMER_CONFIG.minSeconds, TIMER_CONFIG.maxSeconds);
 
   // drafting => set seconds of draft
   if (isEditingDraft(editingStepIdx)) {
@@ -158,6 +158,36 @@ export function applySetRestSeconds(state: TimerConfigState, seconds: number): T
     ...state,
     steps: updateStep(state.steps, editingStepIdx, {
       restSeconds: clampedSeconds,
+    }),
+  };
+}
+
+export function applySetRepetitions(
+  state: TimerConfigState,
+  repetitions: number,
+): TimerConfigState {
+  const editingStepIdx = state.editingStepIdx;
+  const clampedRepetitions = clamp(
+    repetitions,
+    TIMER_CONFIG.minRepetitions,
+    TIMER_CONFIG.maxRepetitions,
+  );
+
+  // drafting => set repetitions of draft
+  if (isEditingDraft(editingStepIdx)) {
+    return {
+      ...state,
+      draftStep: { ...state.draftStep, repetitions: clampedRepetitions },
+    };
+  }
+
+  if (state.steps[editingStepIdx] === undefined) return state;
+
+  // editing => set repetitions of step that's being edited
+  return {
+    ...state,
+    steps: updateStep(state.steps, editingStepIdx, {
+      repetitions: clampedRepetitions,
     }),
   };
 }
