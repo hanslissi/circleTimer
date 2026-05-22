@@ -5,19 +5,15 @@ type Button = {
   onClick: () => void;
   disabled?: boolean;
   className?: string;
-  children?: string;
+  children?: React.ReactNode;
 };
 
 const Button = ({ onClick, disabled, className, children }: Button) => {
+  const buttonContent =
+    typeof children === "string" ? <span className={"shinyTextDark"}>{children}</span> : children;
   return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={clsx(styles.button, className)}
-    >
-      <div className={styles.innerButton}>
-        <span className={"shinyTextDark"}>{children}</span>
-      </div>
+    <button onClick={onClick} disabled={disabled} className={clsx(styles.button, className)}>
+      {buttonContent}
     </button>
   );
 };
