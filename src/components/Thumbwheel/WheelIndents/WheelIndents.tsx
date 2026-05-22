@@ -5,7 +5,7 @@ type Props = {
   color?: "teal" | "autumn";
 };
 
-export const WheelIndents = ({ color = "teal" }: Props) => {
+const WheelIndents = ({ color = "teal" }: Props) => {
   const glowingIndentClassNames = clsx(styles.glowingIndent, {
     [styles.glowingTeal]: color === "teal",
     [styles.glowingAutumn]: color === "autumn",
@@ -31,3 +31,5 @@ export const WheelIndents = ({ color = "teal" }: Props) => {
     </div>
   );
 };
+
+export default WheelIndents;

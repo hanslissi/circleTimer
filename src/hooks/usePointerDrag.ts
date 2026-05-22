@@ -12,47 +12,48 @@ type Props = {
 
 export const usePointerDrag = ({ onDrag, onDragEnd }: Props) => {
   const startPosRef = useRef<PointerPosition | null>(null);
-  const currentDragDeltaRef = useRef<PointerPosition>({ x: 0, y: 0 });
+  const prevPosRef = useRef<PointerPosition>({ x: 0, y: 0 });
   const totalDeltaRef = useRef<PointerPosition>({ x: 0, y: 0 });
   const pointerIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handlePointerMove = (e: PointerEvent) => {
       if (
-        startPosRef.current !== null &&
-        pointerIdRef.current === e.pointerId
+        startPosRef.current === null ||
+        pointerIdRef.current !== e.pointerId
       ) {
-        currentDragDeltaRef.current = {
-          x: e.clientX - startPosRef.current.x,
-          y: e.clientY - startPosRef.current.y,
-        };
+        return;
+      }
 
-        const totalDelta = {
-          x: totalDeltaRef.current.x + currentDragDeltaRef.current.x,
-          y: totalDeltaRef.current.y + currentDragDeltaRef.current.y,
-        };
+      const delta: PointerPosition = {
+        x: e.clientX - prevPosRef.current.x,
+        y: e.clientY - prevPosRef.current.y,
+      };
 
-        if (onDrag) {
-          onDrag(currentDragDeltaRef.current, totalDelta);
-        }
+      totalDeltaRef.current = {
+        x: totalDeltaRef.current.x + delta.x,
+        y: totalDeltaRef.current.y + delta.y,
+      };
+
+      prevPosRef.current = { x: e.clientX, y: e.clientY };
+
+      if (onDrag) {
+        onDrag(delta, { ...totalDeltaRef.current });
       }
     };
 
     const handlePointerUp = (e: PointerEvent) => {
-      if (pointerIdRef.current === e.pointerId) {
-        totalDeltaRef.current = {
-          x: totalDeltaRef.current.x + currentDragDeltaRef.current.x,
-          y: totalDeltaRef.current.y + currentDragDeltaRef.current.y,
-        };
-
-        if (onDragEnd) {
-          onDragEnd(totalDeltaRef.current);
-        }
-
-        startPosRef.current = null;
-        currentDragDeltaRef.current = { x: 0, y: 0 };
-        pointerIdRef.current = null;
+      if (pointerIdRef.current !== e.pointerId) {
+        return;
       }
+
+      if (onDragEnd) {
+        onDragEnd({ ...totalDeltaRef.current });
+      }
+
+      startPosRef.current = null;
+      prevPosRef.current = { x: 0, y: 0 };
+      pointerIdRef.current = null;
     };
 
     document.addEventListener("pointermove", handlePointerMove);
@@ -69,11 +70,17 @@ export const usePointerDrag = ({ onDrag, onDragEnd }: Props) => {
   const handlePointerDown: PointerEventHandler<HTMLElement> = (e) => {
     e.preventDefault();
     startPosRef.current = { x: e.clientX, y: e.clientY };
+    prevPosRef.current = { x: e.clientX, y: e.clientY };
     pointerIdRef.current = e.pointerId;
     e.currentTarget.setPointerCapture(e.pointerId);
   };
 
+  const setTotalDelta = (partial: Partial<PointerPosition>) => {
+    totalDeltaRef.current = { ...totalDeltaRef.current, ...partial };
+  };
+
   return {
     handlePointerDown,
+    setTotalDelta,
   };
 };

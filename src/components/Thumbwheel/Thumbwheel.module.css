@@ -1,5 +1,10 @@
-.container {
-  --thumbwheel-padding: var(--gap-lg);
+.metalSlant {
+  padding: 2px;
+  border-radius: .6rem;
+}
+
+.platform {
+  --thumbwheel-padding: var(--gap-md);
   --thumbwheel-width: 5rem;
   --thumbwheel-height: calc(var(--thumbwheel-width) * 2);
 
@@ -10,11 +15,12 @@
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-elevate); 
 }
-.container::before {
+/* Left light highlight */
+.platform::before {
   content: "";
   position: absolute;
 
-  /* Place shadow on right side */
+  /* Place highlight on left side */
   right: calc(var(--thumbwheel-padding) + 5rem);
   top: var(--thumbwheel-padding);
 
@@ -24,13 +30,13 @@
   /* Key part */
   background: radial-gradient(
       ellipse at right center,
-      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.1),
       rgba(255, 255, 255, 0.02) 40%,
       rgba(255, 255, 255, 0) 50%
     ),
     radial-gradient(
       ellipse at right center,
-      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.1),
       rgba(255, 255, 255, 0.02) 50%,
       rgba(255, 255, 255, 0) 60%
     ),
@@ -43,7 +49,8 @@
   transform: skewY(20deg);
   pointer-events: none;
 }
-.container::after {
+/* Right shadow */
+.platform::after {
   content: "";
   position: absolute;
 

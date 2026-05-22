@@ -1,3 +1,8 @@
+.metalSlant {
+  padding: 1px;
+  border-radius: var(--radius-full);
+}
+
 .container {
   --c-glow-center-start: var(--c-teal-200);
   --c-glow-center-end: var(--c-teal-600);
