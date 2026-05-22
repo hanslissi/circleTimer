@@ -6,6 +6,7 @@ import {
   applySetWorkSeconds,
   applySelectEditingStep,
   applyToggleEditingStep,
+  applySetRepetitions,
 } from "./timerConfigSlice.bl";
 import type { StateCreator } from "zustand";
 import type { TimerConfigSlice } from "./timerConfigSlice.types";
@@ -30,5 +31,8 @@ export const createTimerConfigSlice: StateCreator<TimerConfigSlice> = (set) => (
   },
   setRestSeconds(seconds) {
     set((state) => applySetRestSeconds(state, seconds));
+  },
+  setRepetitions(repetitions) {
+    set((state) => applySetRepetitions(state, repetitions));
   },
 });

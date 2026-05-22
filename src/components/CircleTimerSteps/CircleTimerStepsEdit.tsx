@@ -9,6 +9,7 @@ const CircleTimerEdit = () => {
   const selectEditingStep = useTimerConfigStore((state) => state.selectEditingStep);
   const setWorkSeconds = useTimerConfigStore((state) => state.setWorkSeconds);
   const setRestSeconds = useTimerConfigStore((state) => state.setRestSeconds);
+  const setRepetitions = useTimerConfigStore((state) => state.setRepetitions);
 
   return (
     <div className={styles.circleTimerContainer}>
@@ -20,6 +21,7 @@ const CircleTimerEdit = () => {
           onToggleSelect={toggleEditingStep}
           onWorkSecondsChange={setWorkSeconds}
           onRestSecondsChange={setRestSeconds}
+          onRepetitionsChange={setRepetitions}
         />
       ))}
     </div>

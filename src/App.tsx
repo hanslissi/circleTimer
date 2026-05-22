@@ -5,7 +5,7 @@ import { useTimerConfigStore } from "@state/timerConfig/useTimerConfigStore";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import { getEditingStep } from "@state/timerConfig/timerConfigSlice.selectors";
 import { PageLayoutWrapper } from "@layouts/PageLayoutWrapper/PageLayoutWrapper";
-import { DurationInput } from "@components/Duration";
+import { DurationInput } from "@components/input/Duration";
 import CircleTimerStepsEdit from "@components/CircleTimerSteps/CircleTimerStepsEdit";
 import CircleTimerStepsDisplay from "@components/CircleTimerSteps/CircleTimerStepsDisplay";
 import { useStopwatchStore } from "@state/stopwatch/useStopwatchStore";
@@ -43,14 +43,14 @@ function App() {
         <div className={styles.interfaceSection}>
           <div className={styles.timeDisplaysSection}>
             <DurationInput
-              min={0}
+              min={TIMER_CONFIG.minSeconds}
               max={TIMER_CONFIG.maxSeconds}
               label="Work time"
               value={editingStep.workSeconds}
               onChange={handleChangeWorkSeconds}
             />
             <DurationInput
-              min={0}
+              min={TIMER_CONFIG.minSeconds}
               max={TIMER_CONFIG.maxSeconds}
               color="autumn"
               label="Rest time"
@@ -61,26 +61,26 @@ function App() {
           <div className={styles.thumbwheelsSection}>
             <div className={styles.thumbwheelContainer}>
               <Thumbwheel
-                min={0}
+                min={TIMER_CONFIG.minSeconds}
                 max={TIMER_CONFIG.maxSeconds}
                 value={editingStep.workSeconds}
                 onChange={handleChangeWorkSeconds}
               />
               <LightProgressBar
-                min={0}
+                min={TIMER_CONFIG.minSeconds}
                 max={TIMER_CONFIG.maxSeconds}
                 value={editingStep.workSeconds}
               />
             </div>
             <div className={styles.thumbwheelContainer}>
               <LightProgressBar
-                min={0}
+                min={TIMER_CONFIG.minSeconds}
                 max={TIMER_CONFIG.maxSeconds}
                 color="autumn"
                 value={editingStep.restSeconds}
               />
               <Thumbwheel
-                min={0}
+                min={TIMER_CONFIG.minSeconds}
                 max={TIMER_CONFIG.maxSeconds}
                 value={editingStep.restSeconds}
                 onChange={handleChangeRestSeconds}

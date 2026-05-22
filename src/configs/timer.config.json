@@ -1,4 +1,6 @@
 {
+  "minSeconds": 1,
   "maxSeconds": 3599,
+  "minRepetitions": 1,
   "maxRepetitions": 99
 }

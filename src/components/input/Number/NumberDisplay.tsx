@@ -10,7 +10,7 @@ type Props = {
   color?: "teal" | "autumn" | "graysky";
 };
 
-const NumberInput = memo(function NumberInput({
+const NumberDisplay = memo(function NumberDisplay({
   value,
   max = 100,
   size = "big",
@@ -43,4 +43,4 @@ const NumberInput = memo(function NumberInput({
   );
 });
 
-export default NumberInput;
+export default NumberDisplay;
