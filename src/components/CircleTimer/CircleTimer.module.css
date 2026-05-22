@@ -1,6 +1,6 @@
 .metalSlant {
   padding: 2px;
-  border-radius: 0.6rem;
+  border-radius: var(--size-md);
 }
 
 .circleTimerContainer {

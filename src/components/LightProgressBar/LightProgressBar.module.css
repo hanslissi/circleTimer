@@ -15,10 +15,10 @@
 
 .variantVertical {
   height: 100%;
-  width: var(--size-lg);
+  width: var(--size-md);
 }
 .variantHorizontal {
-  height: var(--size-lg);
+  height: var(--size-md);
   width: 100%;
 }
 
