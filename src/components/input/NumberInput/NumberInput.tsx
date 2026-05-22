@@ -2,6 +2,7 @@ import { memo, type ChangeEvent } from "react";
 import { clsx } from "clsx";
 import styles from "../styles/Input.module.css";
 import { useRawNumericInput } from "../hooks/useRawNumericInput";
+import { getPlaceholderDisplay } from "./utils/numberDisplayUtils";
 
 type Props = {
   value: number;
@@ -15,14 +16,6 @@ type Props = {
   onChange?: (value: number) => void;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
 };
-
-/**
- * Returns a zero-padded placeholder string matching the width of max.
- * e.g. max=99 => "00", max=999 => "000"
- */
-function getPlaceholderDisplay(max: number): string {
-  return String(max).replace(/[0-9]/g, "0");
-}
 
 const NumberInput = memo(function NumberInput({
   value,
