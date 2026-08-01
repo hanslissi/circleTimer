@@ -1,18 +1,16 @@
 import { clsx } from "clsx";
 import { memo } from "react";
-import { Diode } from "@components/Diode";
 import { DurationInput } from "@components/input/Duration";
 import { LightProgressBar } from "@components/LightProgressBar";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import { NumberInput } from "@components/input/Number";
+import { Diode } from "@components/Diode";
 import styles from "./TimerStep.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
 type Props = Readonly<{
   timerStep: TimerStep;
-  selected: boolean;
-  onSelect: (timerStep: TimerStep) => void;
-  onToggleSelect: (timerStep: TimerStep) => void;
+  onSelect?: (timerStep: TimerStep) => void;
   onWorkSecondsChange: (seconds: number) => void;
   onRestSecondsChange: (seconds: number) => void;
   onRepetitionsChange: (repetitions: number) => void;
@@ -20,26 +18,20 @@ type Props = Readonly<{
 
 const TimerStepEdit = memo(function TimerStepEdit({
   timerStep,
-  selected,
   onSelect,
-  onToggleSelect,
   onWorkSecondsChange,
   onRestSecondsChange,
   onRepetitionsChange,
 }: Props) {
   const handleSelect = () => {
-    onSelect(timerStep);
-  };
-
-  const handleToggleSelect = () => {
-    onToggleSelect(timerStep);
+    onSelect?.(timerStep);
   };
 
   return (
     <div className={clsx(styles.metalSlant, "metalSlantOutdent")}>
       <div className={clsx(styles.platform, "litPlatform")}>
         <div className={styles.valueDisplay}>
-          <Diode on={selected} onClick={handleToggleSelect} />
+          <Diode on={false} />
 
           <div className={styles.valueDisplayGroup}>
             <DurationInput

@@ -11,19 +11,20 @@ type Props = Readonly<{
 }>;
 
 const CircleTimerDisplay = ({ timerSteps }: Props) => {
+  const isStopwatchRunning = useStopwatchStore((state) => state.isRunning);
   const secondsPassed = useStopwatchStore((state) => state.secondsPassed);
-  const stopStopwatch = useStopwatchStore((state) => state.stop);
+  const resetStopWatch = useStopwatchStore((state) => state.reset);
   const [activeTimerStepIdx, setActiveTimerStepIdx] = useState(0);
 
   const handleStepEnd = useCallback(() => {
     if (activeTimerStepIdx >= timerSteps.length - 1) {
       setActiveTimerStepIdx(0);
-      stopStopwatch();
+      resetStopWatch();
     } else {
       setActiveTimerStepIdx((prev) => prev + 1);
     }
     timerAudio.playRest();
-  }, [activeTimerStepIdx, setActiveTimerStepIdx, timerSteps.length, stopStopwatch]);
+  }, [activeTimerStepIdx, setActiveTimerStepIdx, timerSteps.length, resetStopWatch]);
 
   const handleWorkEnd = useCallback(() => {
     timerAudio.playWork();
@@ -46,10 +47,11 @@ const CircleTimerDisplay = ({ timerSteps }: Props) => {
           0,
         );
 
+        const isStepActive = isStopwatchRunning && stepIdx === activeTimerStepIdx;
         return (
           <TimerStepDisplay
             key={stepIdx}
-            active={stepIdx === activeTimerStepIdx}
+            active={isStepActive}
             timerStep={timerStep}
             secondsPassed={secondsPassedForStep}
             onStepEnd={handleStepEnd}

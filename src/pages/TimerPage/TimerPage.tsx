@@ -11,14 +11,15 @@ const TimerPage = () => {
   const navigate = useNavigate();
   const isStopwatchRunning = useStopwatchStore((state) => state.isRunning);
   const startStopwatch = useStopwatchStore((state) => state.start);
-  const stopStopwatch = useStopwatchStore((state) => state.stop);
+  const resetStopwatch = useStopwatchStore((state) => state.reset);
   const timerSteps = useTimerConfigStore((state) => state.steps);
 
   const handleClickStartStop = () => {
     if (isStopwatchRunning) {
-      stopStopwatch();
+      resetStopwatch();
+    } else {
+      startStopwatch();
     }
-    startStopwatch();
   };
 
   const handleClickEdit = () => {
@@ -29,11 +30,18 @@ const TimerPage = () => {
     <PageLayoutWrapper>
       <div className={styles.circleTimer}>
         <div className={styles.timerStepsSection}>
-          <CircleTimerStepsDisplay timerSteps={timerSteps} />
+          <CircleTimerStepsDisplay
+            timerSteps={timerSteps}
+            key={isStopwatchRunning ? "running" : "idle"}
+          />
         </div>
         <div className={styles.buttonsSection}>
-          <Button onClick={handleClickEdit} className={styles.editButton}>Edit</Button>
-          <Button onClick={handleClickStartStop} className={styles.startStopButton}>{isStopwatchRunning ? "Stop" : "Start"}</Button>
+          <Button onClick={handleClickEdit} className={styles.editButton}>
+            Edit
+          </Button>
+          <Button onClick={handleClickStartStop} className={styles.startStopButton}>
+            {isStopwatchRunning ? "Stop" : "Start"}
+          </Button>
         </div>
       </div>
     </PageLayoutWrapper>

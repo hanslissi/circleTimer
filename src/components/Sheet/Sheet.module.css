@@ -13,7 +13,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: color-mix(in srgb, var(--c-graysky-950) 50%, transparent);
+  background-color: color-mix(in srgb, var(--c-graysky-950) 70%, transparent);
   z-index: 1;
 
   animation-name: fade-in;
@@ -28,7 +28,7 @@
   left: 0;
   z-index: 2;
   width: 100%;
-  height: 90%;
+  max-height: 95%;
 
   background-color: var(--c-graysky-950);
   border-top-left-radius: var(--radius-md);
@@ -47,6 +47,9 @@
 }
 
 .content {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 @keyframes fade-in {
