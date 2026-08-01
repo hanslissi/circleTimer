@@ -4,21 +4,25 @@ import { DurationInput } from "@components/input/Duration";
 import { LightProgressBar } from "@components/LightProgressBar";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import { NumberInput } from "@components/input/Number";
-import { Diode } from "@components/Diode";
+import Button from "@components/Button";
 import styles from "./TimerStep.module.css";
 import type { TimerStep } from "@app-types/Timer.types";
 
 type Props = Readonly<{
+  showEditButton?: boolean;
   timerStep: TimerStep;
   onSelect?: (timerStep: TimerStep) => void;
+  onEditStep?: (timerStep: TimerStep) => void;
   onWorkSecondsChange: (seconds: number) => void;
   onRestSecondsChange: (seconds: number) => void;
   onRepetitionsChange: (repetitions: number) => void;
 }>;
 
 const TimerStepEdit = memo(function TimerStepEdit({
+  showEditButton = false,
   timerStep,
   onSelect,
+  onEditStep,
   onWorkSecondsChange,
   onRestSecondsChange,
   onRepetitionsChange,
@@ -27,11 +31,15 @@ const TimerStepEdit = memo(function TimerStepEdit({
     onSelect?.(timerStep);
   };
 
+  const handleClickEditStep = () => {
+    onEditStep?.(timerStep);
+  };
+
   return (
     <div className={clsx(styles.metalSlant, "metalSlantOutdent")}>
       <div className={clsx(styles.platform, "litPlatform")}>
         <div className={styles.valueDisplay}>
-          <Diode on={false} />
+          {showEditButton ? <Button onClick={handleClickEditStep}>Edit</Button> : null}
 
           <div className={styles.valueDisplayGroup}>
             <DurationInput
