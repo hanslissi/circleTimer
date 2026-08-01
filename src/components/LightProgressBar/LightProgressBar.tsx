@@ -22,7 +22,7 @@ const LightProgressBar = ({
   const lightStripClassNames = clsx(styles.lightstrip, {
     [styles.glowingTeal]: color === "teal",
     [styles.glowingAutumn]: color === "autumn",
-    [styles.glowingGraySky]: color === "graysky",
+    [styles.glowingGraysky]: color === "graysky",
   });
   const variantClassName = variant === "vertical" ? styles.variantVertical : styles.variantHorizontal;
 

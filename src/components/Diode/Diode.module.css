@@ -23,7 +23,7 @@
   --c-glow-center-start: var(--c-autumn-200);
   --c-glow-center-end: var(--c-autumn-600);
 }
-.glowingGraySky {
+.glowingGraysky {
   --c-glow-center-start: var(--c-graysky-200);
   --c-glow-center-end: var(--c-graysky-300);
 }

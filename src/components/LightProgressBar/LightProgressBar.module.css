@@ -72,7 +72,7 @@
   --c-glow-shadow-big: var(--c-autumn-300);
 }
 
-.glowingGraySky {
+.glowingGraysky {
   --c-background: var(--c-graysky-950);
   --c-glow-center-start: var(--c-graysky-500);
   --c-glow-center-end: var(--c-graysky-200);

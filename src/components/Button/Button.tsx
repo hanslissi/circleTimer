@@ -1,14 +1,14 @@
 import { clsx } from "clsx";
 import styles from "./Button.module.css";
 
-type Button = {
+type Props = Readonly<{
   onClick: () => void;
   disabled?: boolean;
   className?: string;
   children?: React.ReactNode;
-};
+}>;
 
-const Button = ({ onClick, disabled, className, children }: Button) => {
+const Button = ({ onClick, disabled, className, children }: Props) => {
   const buttonContent =
     typeof children === "string" ? <span className={"shinyTextDark"}>{children}</span> : children;
   return (
