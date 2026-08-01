@@ -1,4 +1,4 @@
-import { TICKING_INTERVAL } from "./stopwatchSlice.constants";
+import { initialState, TICKING_INTERVAL } from "./stopwatchSlice.constants";
 import type { StopwatchState } from "./stopwatchSlice.types";
 
 export function createStopwatchTimer(onTick: (secondsPassed: number) => void) {
@@ -56,6 +56,12 @@ export function applyStop(state: StopwatchState): StopwatchState {
   return {
     ...state,
     isRunning: false,
+  };
+}
+
+export function applyReset(): StopwatchState {
+  return {
+    ...initialState,
   };
 }
 
