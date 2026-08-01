@@ -33,7 +33,7 @@ const NumberInput = memo(function NumberInput({
     {
       [styles.glowingTeal]: color === "teal",
       [styles.glowingAutumn]: color === "autumn",
-      [styles.glowingGraySky]: color === "graysky",
+      [styles.glowingGraysky]: color === "graysky",
     },
     {
       [styles.variantBig]: size === "big",

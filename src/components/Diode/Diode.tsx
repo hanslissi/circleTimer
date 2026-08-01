@@ -11,7 +11,7 @@ const Diode = ({ on = false, color = "teal", onClick }: Props) => {
   const themeClassName = clsx({
     [styles.glowingTeal]: color === "teal",
     [styles.glowingAutumn]: color === "autumn",
-    [styles.glowingGraySky]: color === "graysky",
+    [styles.glowingGraysky]: color === "graysky",
   });
   return (
     <button
