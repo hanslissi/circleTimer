@@ -6,7 +6,7 @@
 }
 
 .litPlatform {
-  background: linear-gradient(178deg, var(--c-graysky-900) 0%, black 100%);
+  background: linear-gradient(178deg, var(--c-graysky-900) 0%, var(--c-graysky-950) 100%);
 }
 
 .metalSlantIndent {
