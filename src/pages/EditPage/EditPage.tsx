@@ -12,6 +12,7 @@ import { getEditingStep } from "@state/timerConfig/timerConfigSlice.selectors";
 import TIMER_CONFIG from "@configs/timer.config.json";
 import Thumbwheel from "@components/Thumbwheel";
 import styles from "./EditPage.module.css";
+import type { TimerStep } from "@app-types/Timer.types";
 
 function EditPage() {
   const navigate = useNavigate();
@@ -42,14 +43,19 @@ function EditPage() {
     setShowAddSheet(false);
   };
 
+  const handleClickEditStep = (timerStep: TimerStep) => {
+    selectEditingStep(timerStep);
+    setShowAddSheet(true);
+  };
+
   return (
     <PageLayoutWrapper>
       <div className={styles.circleTimerEdit}>
         <div className={styles.stepsList}>
-          <CircleTimerStepsEdit />
+          <CircleTimerStepsEdit onEditStep={handleClickEditStep} />
           <Button onClick={handleClickOpenAddSheet}>Add Step</Button>
         </div>
-        <div className={styles.buttonsSection}>
+        <div className={clsx(styles.buttonsSection, styles.bottomFloading)}>
           <Button onClick={handleClickSave} className={styles.saveButton}>
             Save
           </Button>
