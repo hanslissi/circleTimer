@@ -20,7 +20,7 @@ export const createTimerConfigSlice: StateCreator<TimerConfigSlice> = (set) => (
   remove() {
     set((state) => applyRemove(state));
   },
-  selectEditingStep(step: TimerStep) {
+  selectEditingStep(step: TimerStep | undefined) {
     set((state) => applySelectEditingStep(state, step));
   },
   toggleEditingStep(step: TimerStep) {
