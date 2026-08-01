@@ -4,12 +4,15 @@ import {
   applyStop,
   applySetSecondsPassed,
   createStopwatchTimer,
+  applyReset,
 } from "./stopwatchSlice.bl";
 import type { StateCreator } from "zustand";
 import type { StopwatchSlice } from "./stopwatchSlice.types";
 
 export const createStopwatchSlice: StateCreator<StopwatchSlice> = (set, get) => {
-  const stopwatchTimer = createStopwatchTimer((secondsPassed) => get().setSecondsPassed(secondsPassed));
+  const stopwatchTimer = createStopwatchTimer((secondsPassed) =>
+    get().setSecondsPassed(secondsPassed),
+  );
 
   return {
     ...initialState,
@@ -28,6 +31,11 @@ export const createStopwatchSlice: StateCreator<StopwatchSlice> = (set, get) => 
 
       stopwatchTimer.stop();
       set((state) => applyStop(state));
+    },
+    reset() {
+      stopwatchTimer.stop();
+      
+      set(() => applyReset());
     },
     setSecondsPassed(seconds: number) {
       set((state) => applySetSecondsPassed(state, seconds));

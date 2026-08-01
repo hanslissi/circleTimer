@@ -6,6 +6,7 @@ export type StopwatchState = {
 export type StopwatchActions = {
   start: () => void;
   stop: () => void;
+  reset: () => void;
   setSecondsPassed: (seconds: number) => void;
 };
 
