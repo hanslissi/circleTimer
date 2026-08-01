@@ -1,0 +1,59 @@
+.circleTimerEdit {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stepsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.legendHeader {
+  display: flex;
+  gap: var(--gap-md);
+  padding: 0 var(--gap-md);
+}
+
+.workRestHeader {
+  width: 89px; /* ~ Width of DurationInput small */
+}
+
+.repetitionsHeader {
+  flex: 1;
+  text-align: right;
+}
+
+.buttonsSection {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-sm);
+}
+
+.saveButton {
+  flex: 1;
+}
+
+.addButton {
+  flex: 1;
+}
+
+.addSheetContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: var(--gap-md);
+}
+
+.thumbwheelsSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.thumbwheelWorkRest {
+  display: flex;
+}

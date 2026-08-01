@@ -4,8 +4,6 @@ import styles from "./CircleTimerSteps.module.css";
 
 const CircleTimerEdit = () => {
   const timerSteps = useTimerConfigStore((state) => state.steps);
-  const editingStepIdx = useTimerConfigStore((state) => state.editingStepIdx);
-  const toggleEditingStep = useTimerConfigStore((state) => state.toggleEditingStep);
   const selectEditingStep = useTimerConfigStore((state) => state.selectEditingStep);
   const setWorkSeconds = useTimerConfigStore((state) => state.setWorkSeconds);
   const setRestSeconds = useTimerConfigStore((state) => state.setRestSeconds);
@@ -13,12 +11,10 @@ const CircleTimerEdit = () => {
 
   return (
     <div className={styles.circleTimerContainer}>
-      {timerSteps.map((step, stepIdx) => (
+      {timerSteps.map((step) => (
         <TimerStepEdit
           timerStep={step}
-          selected={editingStepIdx === stepIdx}
           onSelect={selectEditingStep}
-          onToggleSelect={toggleEditingStep}
           onWorkSecondsChange={setWorkSeconds}
           onRestSecondsChange={setRestSeconds}
           onRepetitionsChange={setRepetitions}

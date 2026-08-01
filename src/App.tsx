@@ -10,6 +10,8 @@ import CircleTimerStepsEdit from "@components/CircleTimerSteps/CircleTimerStepsE
 import CircleTimerStepsDisplay from "@components/CircleTimerSteps/CircleTimerStepsDisplay";
 import { useStopwatchStore } from "@state/stopwatch/useStopwatchStore";
 import styles from "./App.module.css";
+import { Sheet } from "@components/Sheet";
+import { useState } from "react";
 
 function App() {
   const isStopwatchRunning = useStopwatchStore((state) => state.isRunning);
@@ -22,6 +24,7 @@ function App() {
   const setWorkSeconds = useTimerConfigStore((state) => state.setWorkSeconds);
   const setRestSeconds = useTimerConfigStore((state) => state.setRestSeconds);
 
+  const [show, setShow] = useState(false);
   const handleChangeWorkSeconds = (seconds: number) => {
     setWorkSeconds(seconds);
   };
@@ -32,6 +35,9 @@ function App() {
 
   return (
     <PageLayoutWrapper>
+      <Sheet show={show} title="Title hello">
+        Pipi kaka
+      </Sheet>
       <div className={styles.circleTimer}>
         <div className={styles.timerStepsSection}>
           {isStopwatchRunning ? (
@@ -89,7 +95,7 @@ function App() {
             </div>
           </div>
           <div className={styles.buttonsSection}>
-            <Button onClick={addAction}>Add</Button>
+            <Button onClick={() => setShow(true)}>Add</Button>
             <Button onClick={removeAction}>Remove</Button>
             <Button onClick={isStopwatchRunning ? stopStopwatch : startStopwatch}>
               {isStopwatchRunning ? "Stop" : "Start"}
