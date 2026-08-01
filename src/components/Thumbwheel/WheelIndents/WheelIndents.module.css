@@ -11,15 +11,21 @@
 }
 
 .glowingTeal {
-  --c-glow-center: var(--c-teal-500);
-  --c-glow-gradient-start: var(--c-teal-200);
-  --c-glow-gradient-end: var(--c-teal-100);
+  --c-glow-center: var(--c-teal-300);
+  --c-glow-gradient-start: var(--c-teal-100);
+  --c-glow-gradient-end: var(--c-teal-500);
 }
 
 .glowingAutumn {
-  --c-glow-center: var(--c-autumn-500);
-  --c-glow-gradient-start: var(--c-autumn-200);
-  --c-glow-gradient-end: var(--c-autumn-100);
+  --c-glow-center: var(--c-autumn-300);
+  --c-glow-gradient-start: var(--c-autumn-100);
+  --c-glow-gradient-end: var(--c-autumn-500);
+}
+
+.glowingGraysky {
+  --c-glow-center: var(--c-graysky-50);
+  --c-glow-gradient-start: var(--c-graysky-200);
+  --c-glow-gradient-end: var(--c-graysky-100);
 }
 
 .container > div:not(.glowingIndent, .spacer) {

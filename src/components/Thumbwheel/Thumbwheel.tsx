@@ -9,7 +9,7 @@ type Props = {
   min?: number;
   max?: number;
   stepSize?: number;
-  color?: "teal" | "autumn";
+  color?: "teal" | "autumn" | "graysky";
 };
 
 const Thumbwheel = ({
