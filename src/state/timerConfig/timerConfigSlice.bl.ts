@@ -88,12 +88,19 @@ export function applyRemove(state: TimerConfigState): TimerConfigState {
   };
 }
 
-export function applySelectEditingStep(state: TimerConfigState, step: TimerStep): TimerConfigState {
-  let updatedEditingStepIdx: number | undefined = state.steps.findIndex((s) => s === step);
+export function applySelectEditingStep(
+  state: TimerConfigState,
+  step: TimerStep | undefined,
+): TimerConfigState {
+  let updatedEditingStepIdx: number | undefined = undefined;
 
-  // if step doesn't exist => no selection
-  if (updatedEditingStepIdx < 0) {
-    updatedEditingStepIdx = undefined;
+  if (step !== undefined) {
+    updatedEditingStepIdx = state.steps.findIndex((s) => s === step);
+
+    // if step doesn't exist => no selection
+    if (updatedEditingStepIdx < 0) {
+      updatedEditingStepIdx = undefined;
+    }
   }
 
   return {
