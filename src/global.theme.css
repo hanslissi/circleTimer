@@ -68,6 +68,8 @@
   --anim-duration-sm: 0.15s;
   --anim-duration-md: 0.3s;
 
+  --anim-cubic-ease-out: cubic-bezier(0.15, 0.4, 0.35, 1);
+
   /* FONT TOKENS */
   --f-size-sm: 0.875rem;
   --f-size-md: 1rem;
