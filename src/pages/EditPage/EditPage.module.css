@@ -11,28 +11,5 @@
   gap: var(--gap-md);
 
   padding: var(--gap-md);
-  padding-bottom: 6rem;
-}
-
-.bottomFloading {
-  position: fixed;
-  bottom: 0;
-}
-
-.buttonsSection {
-  display: flex;
-  flex-direction: row;
-  gap: var(--gap-sm);
-
-  width: 100%;
-  padding: var(--gap-md);
-  box-sizing: border-box;
-
-  background-color: var(--c-graysky-950);
-  border-top-left-radius: var(--radius-lg);
-  border-top-right-radius: var(--radius-lg);
-}
-
-.saveButton {
-  flex: 1;
+  padding-bottom: 8rem;
 }

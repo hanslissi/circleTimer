@@ -6,7 +6,7 @@ import Button from "@components/Button";
 import { useTimerConfigStore } from "@state/timerConfig/useTimerConfigStore";
 import { getEditingStep, getIsEditingDraft } from "@state/timerConfig/timerConfigSlice.selectors";
 import TIMER_CONFIG from "@configs/timer.config.json";
-import pageStyles from "../EditPage.module.css";
+import pageStyles from "../../PageStyles.module.css";
 import styles from "./AddEditSheet.module.css";
 
 type Props = Readonly<{
@@ -81,18 +81,18 @@ const AddEditSheet = ({ show, onDismiss }: Props) => {
             color="graysky"
           />
         </div>
-        <div className={pageStyles.buttonsSection}>
+        <div className={clsx(pageStyles.actionBox, pageStyles.buttonsSection)}>
           {isEditingDraft ? (
             <>
               <Button onClick={handleClickDiscard}>Discard</Button>
-              <Button onClick={handleClickAddStep} className={styles.addButton}>
+              <Button onClick={handleClickAddStep} className={pageStyles.primaryButton}>
                 Add
               </Button>
             </>
           ) : (
             <>
               <Button onClick={handleClickDeleteStep}>Delete Step</Button>
-              <Button onClick={handleClickSave} className={styles.addButton}>
+              <Button onClick={handleClickSave} className={pageStyles.primaryButton}>
                 Save
               </Button>
             </>
