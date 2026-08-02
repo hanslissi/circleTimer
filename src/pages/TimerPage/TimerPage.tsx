@@ -8,6 +8,7 @@ import { useStopwatchStore } from "@state/stopwatch/useStopwatchStore";
 import { ROUTE_PATHS } from "@pages/constants";
 import { secondsToText } from "@utils/timeDisplayUtils";
 import { calcTimerDuration } from "@utils/timerUtils";
+import { timerAudio } from "@audio/timerAudios";
 import pageStyles from "../PageStyles.module.css";
 import styles from "./TimerPage.module.css";
 
@@ -23,6 +24,7 @@ const TimerPage = () => {
     if (isStopwatchRunning) {
       resetStopwatch();
     } else {
+      void timerAudio.unlock();
       startStopwatch();
     }
   };
