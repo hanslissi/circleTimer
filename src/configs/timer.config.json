@@ -1,5 +1,5 @@
 {
-  "minSeconds": 1,
+  "minSeconds": 0,
   "maxSeconds": 3599,
   "minRepetitions": 1,
   "maxRepetitions": 99
