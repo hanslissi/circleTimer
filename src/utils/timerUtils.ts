@@ -27,6 +27,13 @@ export function calcCurrentTimerStep(secondsPassed: number, timerStep: TimerStep
   };
 }
 
-export function calcStepDuration(timerStep: TimerStep) {
+export function calcStepDuration(timerStep: TimerStep): number {
   return (timerStep.workSeconds + timerStep.restSeconds) * timerStep.repetitions;
+}
+
+export function calcTimerDuration(timerSteps: TimerStep[]): number {
+  return timerSteps.reduce(
+    (prevSumSeconds, timerStep) => prevSumSeconds + calcStepDuration(timerStep),
+    0,
+  );
 }
