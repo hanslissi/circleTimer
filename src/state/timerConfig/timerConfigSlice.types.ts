@@ -7,8 +7,8 @@ export type TimerConfigState = {
 };
 
 export type TimerConfigActions = {
-  add: () => void;
-  remove: () => void;
+  persistDraft: () => void;
+  deleteStep: (step: TimerStep) => void;
   selectEditingStep: (step: TimerStep | undefined) => void;
   toggleEditingStep: (step: TimerStep) => void;
   setWorkSeconds: (seconds: number) => void;

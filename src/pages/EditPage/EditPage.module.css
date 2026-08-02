@@ -14,21 +14,6 @@
   padding-bottom: 6rem;
 }
 
-.legendHeader {
-  display: flex;
-  gap: var(--gap-md);
-  padding: 0 var(--gap-md);
-}
-
-.workRestHeader {
-  width: 89px; /* ~ Width of DurationInput small */
-}
-
-.repetitionsHeader {
-  flex: 1;
-  text-align: right;
-}
-
 .bottomFloading {
   position: fixed;
   bottom: 0;
@@ -50,29 +35,4 @@
 
 .saveButton {
   flex: 1;
-}
-
-.addButton {
-  flex: 1;
-}
-
-.addSheetContent {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  gap: var(--gap-md);
-
-  padding-bottom: 6rem;
-}
-
-.thumbwheelsSection {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.thumbwheelWorkRest {
-  display: flex;
 }
