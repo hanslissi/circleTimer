@@ -1,5 +1,6 @@
 import jazzRest from "@assets/sounds/jazz/Jazz_Initiate_Rest.mp3";
 import jazzWork from "@assets/sounds/jazz/Jazz_Initiate_Work.mp3";
+import { fetchAudioBuffer } from "@utils/audioContextUtils";
 
 class TimerAudio {
   private ctx: AudioContext | null = null;
@@ -8,30 +9,38 @@ class TimerAudio {
     work: null,
   };
   private currentSource: AudioBufferSourceNode | null = null;
+  private unlockPromise: Promise<void> | null = null;
 
-  async unlock() {
-    if (this.ctx) return;
+  unlock() {
+    if (this.unlockPromise !== null) {
+      return this.unlockPromise;
+    }
 
-    this.ctx = new AudioContext();
+    this.unlockPromise = this._doUnlock().catch((err) => {
+      // Allows for silend retry
+      this.unlockPromise = null;
+      console.error("TimerAudio unlock failed:", err);
+    });
+
+    return this.unlockPromise;
+  }
+
+  private async _doUnlock() {
+    const ctx = new AudioContext();
 
     // Safari sometimes starts in "suspended" state even inside a gesture
-    if (this.ctx.state === "suspended") {
-      await this.ctx.resume();
+    if (ctx.state === "suspended") {
+      await ctx.resume();
     }
 
     const [restBuffer, workBuffer] = await Promise.all([
-      this.fetchAndDecode(jazzRest),
-      this.fetchAndDecode(jazzWork),
+      fetchAudioBuffer(ctx, jazzRest),
+      fetchAudioBuffer(ctx, jazzWork),
     ]);
 
     this.buffers.rest = restBuffer;
     this.buffers.work = workBuffer;
-  }
-
-  private async fetchAndDecode(url: string): Promise<AudioBuffer> {
-    const response = await fetch(url);
-    const arrayBuffer = await response.arrayBuffer();
-    return this.ctx!.decodeAudioData(arrayBuffer);
+    this.ctx = ctx;
   }
 
   private play(buffer: AudioBuffer | null) {
