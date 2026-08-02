@@ -23,6 +23,9 @@ const TimerPage = () => {
   };
 
   const handleClickEdit = () => {
+    if (isStopwatchRunning) {
+      resetStopwatch();
+    }
     navigate(ROUTE_PATHS.EDIT);
   };
 

@@ -11,3 +11,7 @@ export function getEditingStep(state: TimerConfigState): TimerStep {
 
   return state.steps[editingStepIdx];
 }
+
+export function getIsEditingDraft(state: TimerConfigState): boolean {
+  return isEditingDraft(state.editingStepIdx);
+}

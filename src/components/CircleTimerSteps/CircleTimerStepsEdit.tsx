@@ -16,8 +16,9 @@ const CircleTimerEdit = ({ onEditStep }: Props) => {
 
   return (
     <div className={styles.circleTimerContainer}>
-      {timerSteps.map((step) => (
+      {timerSteps.map((step, stepIdx) => (
         <TimerStepEdit
+          key={stepIdx}
           timerStep={step}
           showEditButton
           onEditStep={onEditStep}

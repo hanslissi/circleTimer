@@ -1,0 +1,37 @@
+.addSheetContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: var(--gap-md);
+}
+
+.legendHeader {
+  display: flex;
+  gap: var(--gap-md);
+  padding: 0 var(--gap-md);
+}
+
+.workRestHeader {
+  width: 89px; /* ~ Width of DurationInput small */
+}
+
+.repetitionsHeader {
+  flex: 1;
+  text-align: right;
+}
+
+.thumbwheelsSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.thumbwheelWorkRest {
+  display: flex;
+}
+
+.addButton {
+  flex: 1;
+}

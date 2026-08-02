@@ -35,7 +35,7 @@ export function adjustRepetitions(
   return { repetitions: step.repetitions + repetitionsDelta };
 }
 
-export function applyAdd(state: TimerConfigState): TimerConfigState {
+export function applyPersistDraft(state: TimerConfigState): TimerConfigState {
   const editingStepIdx = state.editingStepIdx;
 
   // drafting => commit draft to steps and reset draft
@@ -47,44 +47,19 @@ export function applyAdd(state: TimerConfigState): TimerConfigState {
     };
   }
 
-  if (state.steps[editingStepIdx] === undefined) {
-    return state;
-  }
-
-  // editing => adding repetitions to step that's being edited
-  return {
-    ...state,
-    steps: updateStep(
-      state.steps,
-      editingStepIdx,
-      adjustRepetitions(state.steps[editingStepIdx], 1),
-    ),
-  };
+  return state;
 }
 
-export function applyRemove(state: TimerConfigState): TimerConfigState {
-  const affectedStepIdx = state.editingStepIdx ?? state.steps.length - 1;
+export function applyDeleteStep(state: TimerConfigState, step: TimerStep): TimerConfigState {
+  const deleteStepIdx = state.steps.findIndex((s) => s === step);
 
-  if (state.steps[affectedStepIdx] === undefined) {
+  if (deleteStepIdx === -1) {
     return state;
-  }
-
-  // results in 0 or less repetitions? => delete step, reset editingStepIdx
-  if (state.steps[affectedStepIdx].repetitions - 1 <= 0) {
-    return {
-      ...state,
-      steps: deleteStep(state.steps, affectedStepIdx),
-      editingStepIdx: undefined,
-    };
   }
 
   return {
     ...state,
-    steps: updateStep(
-      state.steps,
-      affectedStepIdx,
-      adjustRepetitions(state.steps[affectedStepIdx], -1),
-    ),
+    steps: deleteStep(state.steps, deleteStepIdx),
   };
 }
 
@@ -98,7 +73,7 @@ export function applySelectEditingStep(
     updatedEditingStepIdx = state.steps.findIndex((s) => s === step);
 
     // if step doesn't exist => no selection
-    if (updatedEditingStepIdx < 0) {
+    if (updatedEditingStepIdx === -1) {
       updatedEditingStepIdx = undefined;
     }
   }
