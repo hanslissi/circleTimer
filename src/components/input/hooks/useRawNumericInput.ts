@@ -24,6 +24,7 @@ type RawInputHandlers = {
   displayValue: string;
   pendingValue: number;
   raw: string;
+  isFocused: boolean;
   setRaw: (raw: string) => void;
   handleFocus: React.FocusEventHandler<HTMLInputElement>;
   handleBlur: () => void;
@@ -96,6 +97,7 @@ export function useRawNumericInput({
     displayValue,
     pendingValue,
     raw,
+    isFocused,
     setRaw,
     handleFocus,
     handleBlur,

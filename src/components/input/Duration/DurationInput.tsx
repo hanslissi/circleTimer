@@ -1,4 +1,4 @@
-import { memo, type ChangeEvent } from "react";
+import { memo, type ChangeEventHandler, type PointerEventHandler } from "react";
 import { clsx } from "clsx";
 import {
   durationDigitsToTimeDisplay,
@@ -48,24 +48,39 @@ const DurationInput = memo(function DurationInput({
   );
 
   const placeholder = getPlaceholderTimeDisplay(max);
-  const { inputRef, displayValue, pendingValue, setRaw, handleFocus, handleBlur, handleKeyDown } =
-    useRawNumericInput({
-      value,
-      min,
-      max,
-      smallNudgeAmount,
-      bigNudgeAmount,
-      maxVisibleCharacters: placeholder.length,
-      onChange,
-      onFocus,
-      serialize: secondsToTimeDisplay,
-      deserialize: timeDisplayToSeconds,
-    });
+  const {
+    inputRef,
+    displayValue,
+    pendingValue,
+    isFocused,
+    setRaw,
+    handleFocus,
+    handleBlur,
+    handleKeyDown,
+  } = useRawNumericInput({
+    value,
+    min,
+    max,
+    smallNudgeAmount,
+    bigNudgeAmount,
+    maxVisibleCharacters: placeholder.length,
+    onChange,
+    onFocus,
+    serialize: secondsToTimeDisplay,
+    deserialize: timeDisplayToSeconds,
+  });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
     const newRawValue = durationDigitsToTimeDisplay(value);
     setRaw(newRawValue);
+  };
+
+  const handlePointerUp: PointerEventHandler<HTMLInputElement> = (e) => {
+    const isTouchOrPen = e.pointerType === "touch" || e.pointerType === "pen";
+    if (isTouchOrPen && !isFocused) {
+      inputRef.current?.select();
+    }
   };
 
   return (
@@ -87,6 +102,7 @@ const DurationInput = memo(function DurationInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
+          onPointerUp={handlePointerUp}
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { memo, type ChangeEvent } from "react";
+import { memo, type ChangeEventHandler, type PointerEventHandler } from "react";
 import { clsx } from "clsx";
 import styles from "../styles/Input.module.css";
 import { useRawNumericInput } from "../hooks/useRawNumericInput";
@@ -42,23 +42,38 @@ const NumberInput = memo(function NumberInput({
   );
 
   const placeholder = getPlaceholderDisplay(max);
-  const { inputRef, displayValue, pendingValue, setRaw, handleFocus, handleBlur, handleKeyDown } =
-    useRawNumericInput({
-      value,
-      min,
-      max,
-      smallNudgeAmount,
-      bigNudgeAmount,
-      maxVisibleCharacters: placeholder.length,
-      onChange,
-      onFocus,
-      serialize: (value) => String(value),
-      deserialize: (value) => Number(value),
-    });
+  const {
+    inputRef,
+    displayValue,
+    pendingValue,
+    isFocused,
+    setRaw,
+    handleFocus,
+    handleBlur,
+    handleKeyDown,
+  } = useRawNumericInput({
+    value,
+    min,
+    max,
+    smallNudgeAmount,
+    bigNudgeAmount,
+    maxVisibleCharacters: placeholder.length,
+    onChange,
+    onFocus,
+    serialize: (value) => String(value),
+    deserialize: (value) => Number(value),
+  });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const digits = e.target.value.replace(/[^0-9]/g, "");
     setRaw(digits);
+  };
+
+  const handlePointerUp: PointerEventHandler<HTMLInputElement> = (e) => {
+    const isTouchOrPen = e.pointerType === "touch" || e.pointerType === "pen";
+    if (isTouchOrPen && !isFocused) {
+      inputRef.current?.select();
+    }
   };
 
   return (
@@ -81,6 +96,7 @@ const NumberInput = memo(function NumberInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
+          onPointerUp={handlePointerUp}
         />
       </div>
     </div>
