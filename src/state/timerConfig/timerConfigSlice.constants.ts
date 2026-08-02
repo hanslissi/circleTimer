@@ -8,8 +8,26 @@ export const initialDraftStep: TimerStep = {
   repetitions: TIMER_CONFIG.minRepetitions,
 };
 
+const demoConfigSteps: TimerStep[] = [
+  {
+    workSeconds: 30,
+    restSeconds: 10,
+    repetitions: 1,
+  },
+  {
+    workSeconds: 20,
+    restSeconds: 10,
+    repetitions: 2,
+  },
+  {
+    workSeconds: 20,
+    restSeconds: 0,
+    repetitions: 1,
+  },
+];
+
 export const initialState: TimerConfigState = {
-  steps: [{ ...initialDraftStep }],
+  steps: demoConfigSteps,
   editingStepIdx: undefined,
   draftStep: { ...initialDraftStep },
 };
